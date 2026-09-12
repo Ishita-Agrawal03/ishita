@@ -1,4 +1,4 @@
-# The Rulebook That Argues With Itself
+# RuleLens — The Rulebook That Argues With Itself
 
 A RAG system over a university's academic regulations that answers student questions
 **only from the actual documents**, and is honest about the three states any question
@@ -14,11 +14,11 @@ without asking the system anything further.
 ## Why this exists
 
 Real regulatory documents get amended piecemeal for years and accumulate genuine
-internal contradictions that nobody notices because nobody reads the whole thing
-at once. This project plants three such contradictions in a synthetic-but-realistic
-university rulebook, and builds a system that surfaces them instead of confidently
-picking a side — while also correctly refusing to answer plausible-sounding questions
-the rulebook simply doesn't address.
+internal contradictions nobody notices because nobody reads the whole thing at once.
+This project plants three such contradictions in a synthetic-but-realistic university
+rulebook, and builds a system that surfaces them instead of confidently picking a
+side — while also correctly refusing to answer plausible-sounding questions the
+rulebook simply doesn't address.
 
 ## Architecture
 
@@ -26,50 +26,38 @@ the rulebook simply doesn't address.
 question
    │
    ▼
-retrieve.py  ──►  Chroma (persistent, local) ──► top-K chunks (with source_file + section metadata)
+retrieve.py  ──►  Chroma (persistent, local) ──► top-12 chunks (with source_file + section metadata)
    │
    ▼
 answer.py
    ├─ if best match is nowhere near the question → NOT_FOUND immediately (no LLM call)
-   └─ else → Groq (llama-3.3-70b-versatile) classifies into ANSWERED / NOT_FOUND / CONTRADICTION
-              and returns strict JSON with citations
+   └─ else → local LLM via Ollama (qwen2.5:14b-instruct), following a 3-step decision
+             procedure, returns strict JSON with state + citations
 ```
 
-- **Chunking** (`src/ingest.py`): splits by heading (markdown `#`/`##` or plain
-  numbered headings like `5. Curfew Policy` for PDF-extracted text) so a chunk is a
-  coherent clause, not an arbitrary character slice. Long sections are further split
-  on numbered sub-clauses (`3.1`, `3.2`, ...). This is what makes citations precise.
-- **Embeddings**: `sentence-transformers/all-MiniLM-L6-v2`, local, no API cost.
+- **Chunking** (`src/ingest.py`): splits by heading (markdown `#`/`##`, or plain
+  numbered headings like `5. Curfew Policy` for PDF-extracted text, since heading
+  markup doesn't survive PDF text extraction) so a chunk is a coherent clause, not
+  an arbitrary character slice. Long sections are further split on numbered
+  sub-clauses (`3.1`, `3.2`, ...). This is what makes citations precise.
+- **Embeddings**: `sentence-transformers/all-MiniLM-L6-v2`, downloaded once from
+  Hugging Face, runs locally, no API cost.
 - **Vector store**: Chroma, persisted to `data/vectorstore/` so ingest only needs to
   run once (re-run any time the corpus changes — it's idempotent).
-- **LLM**: Groq's `llama-3.3-70b-versatile`, `temperature=0`, forced into strict JSON
-  output. The system prompt (`src/answer.py`) is the real mechanism for balancing
-  over-answering vs over-refusing — see below.
-
-## The one config value
-
-The assignment's core tension — a system that never admits ignorance passes easy
-questions and fails every hard one; a system that's too cautious refuses things
-printed plainly in the document — is controlled by exactly one number:
-
-```python
-RETRIEVAL_DISTANCE_CEILING = 1.75   # src/answer.py
-```
-
-If retrieval's best match is farther than this from the question, we return
-`NOT_FOUND` **without even calling the LLM** — there's no point asking a model to
-"be careful" about something with zero topical relevance. Set it too low and
-genuinely-answerable-but-oddly-phrased questions get killed before the LLM sees
-them. Set it too high and every off-topic question reaches the LLM, relying
-entirely on prompt discipline.
-
-We deliberately set it generously so it only filters *near-total* irrelevance, and
-push almost all of the real "is this actually covered, or just adjacent?" judgment
-onto the LLM via an explicit instruction: *if the passage covers a similar-but-different
-scenario (medical leave ≠ family wedding), that's `NOT_FOUND`, not a stretch to
-`ANSWERED`.* That prompt-level strictness is what actually separates passing 19/25
-hard questions from passing 5/25 or 25/25-but-refusing-everything-else — see
-`eval/results.md` for what we measured.
+- **LLM**: `qwen2.5:14b-instruct`, served locally via [Ollama](https://ollama.com),
+  called with `temperature=0` and `format="json"` for strict JSON output.
+  No API key, no external calls, no per-token cost. (Chosen after two earlier
+  model choices — a hosted API model that hit rate limits mid-eval, and a smaller
+  4B local model that wasn't reliable enough on this task's nuance — see
+  **Model selection history** below.)
+- **Retrieval sanity check**: before the LLM is even called, if the best (lowest)
+  retrieval distance exceeds `RETRIEVAL_DISTANCE_CEILING = 1.75`, the system returns
+  `NOT_FOUND` immediately, with no LLM call. This only screens out questions with
+  essentially zero topical relevance to the corpus (e.g. "what's the capital of
+  France"). See `src/answer.py`'s module docstring for why this is the one
+  deliberately-tuned numeric config value in the system, and why almost all of the
+  real ANSWERED-vs-NOT_FOUND-vs-CONTRADICTION judgment is pushed onto the LLM via
+  prompt design rather than a numeric threshold.
 
 ## Repo structure
 
@@ -86,35 +74,124 @@ contradictions.md                 answer key: exact location of all 3 planted co
 src/
 ├── ingest.py                     chunk corpus, embed, store in Chroma
 ├── retrieve.py                   query the vector store
-├── answer.py                     the three-state classification logic + Groq call
+├── answer.py                     the three-state classification logic + Ollama call
 └── app.py                        Streamlit demo UI
 
 eval/
-├── questions.json                 10 answerable + 3 contradiction + 25 hard unanswerable
+├── questions.json                 13 answerable + 3 contradiction + 25 hard unanswerable
 ├── run_eval.py                    scores automatically, no prose-squinting required
-├── results.json                   generated by run_eval.py
-└── results.md                     generated by run_eval.py (human-readable version)
+├── results.json                   generated by run_eval.py — the raw scored output
+└── results.md                     generated by run_eval.py — human-readable version
 ```
 
-## Setup (2 minutes)
+## Installation
 
 ```bash
+git clone <your-repo-url>
+cd rulebook-oracle
+
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
 pip install -r requirements.txt
-export GROQ_API_KEY=your_key_here
 
-python src/ingest.py          # one-time: builds the vector store
-python src/answer.py "What is the minimum attendance required for exams?"   # sanity check
-
-python eval/run_eval.py       # runs all 38 questions, prints + saves scores
-streamlit run src/app.py      # the demo UI
+# Install Ollama (if not already): https://ollama.com/download
+ollama pull qwen2.5:14b-instruct
 ```
 
-## Honest numbers
+No API keys required anywhere in this project — embeddings and the LLM both run
+locally.
 
-Run `python eval/run_eval.py` and it fills in `eval/results.md` and `eval/results.json`
-automatically — that's the actual scored output, not a claim. (This repo ships with
-the code but the eval hasn't been run in this environment, since it has no internet
-access to reach the Groq API — running it is the first thing to do after cloning.)
+## Running the app
+
+```bash
+ollama serve                     # if not already running as a background service
+python src/ingest.py             # one-time: builds the vector store (~30 sec)
+
+streamlit run src/app.py
+```
+
+The UI shows the answer, a colored state badge (ANSWERED / NOT_FOUND /
+CONTRADICTION), expandable citations with exact chunk/section references, and — in
+the sidebar — the current score from the last evaluation run, for demo purposes.
+
+Sanity-check the pipeline from the command line first, if you prefer:
+```bash
+python src/answer.py "What is the minimum attendance required for exams?"
+```
+
+## Running the evaluation
+
+```bash
+python eval/run_eval.py                          # full 41-question run
+python eval/run_eval.py --bucket contradiction    # just the contradiction bucket
+python eval/run_eval.py --skip answerable         # everything except answerable (useful once that bucket is stable)
+python eval/run_eval.py --sleep 1.0               # slow down between calls if needed
+```
+
+Prints PASS/FAIL per question, a confusion matrix, and writes `eval/results.json` +
+`eval/results.md` automatically — nothing here requires reading prose to score.
+
+## Honest numbers (most recent run)
+
+**35 / 41 correct.**
+
+| Bucket | Score |
+|---|---|
+| Answerable | 9/13 |
+| Contradiction | 3/3 |
+| Unanswerable (the 25 hard ones) | 23/25 |
+
+Full detail, per-question citations, and reasoning: `eval/results.md`.
+
+The remaining 6 failures split into two shapes:
+- **4 ANSWERED questions returning NOT_FOUND** (A2, A4, A7, A8) — the model is
+  occasionally being too conservative on questions with a single, clearly-stated
+  answer. Not yet root-caused to a specific retrieval or prompt issue at time of
+  writing (the failures are recent, following prompt work focused on fixing the
+  contradiction-detection failures below).
+- **2 NOT_FOUND questions returning ANSWERED** (U5, U10) — the model occasionally
+  still extends a rule across a section boundary the corpus doesn't explicitly
+  bridge (the exact failure pattern the Step 3 anti-inference rule in the prompt is
+  meant to catch, but doesn't catch 100% of the time).
+
+The contradiction bucket (3/3) required the most iteration: earlier runs saw the
+model pick one value and answer confidently instead of flagging the conflict,
+particularly when one passage read as more "operative" or "authoritative" than the
+other. The fix that worked was adding explicit worked examples of exactly that
+failure pattern to the prompt (see `src/answer.py`'s `SYSTEM_PROMPT`, Step 2(b)),
+rather than only stating the rule abstractly — this model responds much more
+reliably to a concrete example of the mistake than to a general instruction not to
+make it.
+
+## Model selection history
+
+Worth documenting since it materially affected results:
+
+1. **`llama-3.3-70b-versatile` via Groq** — worked well but rate-limited during
+   evaluation runs on the free tier, and one run failed a question purely on
+   malformed JSON (an unescaped quote broke the parser, not a reasoning failure).
+2. **`qwen3:4b` via Ollama (local)** — free and unlimited, but noticeably too weak
+   for this task's nuance: it failed easy ANSWERED questions the bigger models never
+   failed, *and* over-extended on NOT_FOUND questions in the same run — noisy in
+   both directions simultaneously, which is a capability ceiling, not something
+   prompt tuning fixes.
+3. **`qwen2.5:14b-instruct` via Ollama (local)** — the model used for the numbers
+   above. No thinking-mode tag issues (unlike qwen3), reliable JSON formatting, and
+   materially more stable than the 4B model. This is the recommended free/local
+   choice for this task.
+
+## What is mocked / simulated
+
+Nothing in the core pipeline is mocked — retrieval, embeddings, and the LLM call are
+all real and running end-to-end against the actual corpus for every question. The
+one thing worth flagging as not fully implemented: an earlier design considered a
+**deterministic pre-check** (regex-based value extraction to catch numeric
+contradictions before the LLM sees the question at all) as a fallback if prompt-only
+fixes couldn't get the contradiction bucket reliable. It wasn't needed in the end —
+prompt iteration alone got the contradiction bucket to 3/3 — so it was not built.
+If you extend this project, that's the natural next lever for further reliability
+on contradiction detection.
 
 ## Known limitations
 
@@ -122,8 +199,12 @@ access to reach the Groq API — running it is the first thing to do after cloni
   a stronger embedding model would likely improve borderline retrieval, at the cost
   of setup complexity.
 - The three-state classification depends on the LLM correctly reasoning about
-  "adjacent but not covered," which is inherently a judgment call; the eval set is
-  designed to stress-test exactly this boundary.
+  "adjacent but not covered" vs. "directly stated," which is inherently a judgment
+  call; the 6/41 remaining failures above are exactly this boundary being crossed
+  in both directions on a minority of questions.
 - Single-turn only — no conversation memory across questions in the CLI/eval; the
   Streamlit UI keeps a visible history but each answer is still generated fresh
   from the current question alone.
+- Local-model dependent: results will vary somewhat by machine (Ollama version,
+  qwen2.5 build) and are not guaranteed bit-identical to the numbers above, though
+  they should be in the same range given `temperature=0`.
