@@ -40,41 +40,38 @@ import ollama
 
 from retrieve import retrieve
 
-OLLAMA_MODEL = "qwen3:4b"
+OLLAMA_MODEL = "qwen2.5:14b-instruct"
 TOP_K = 12
 RETRIEVAL_DISTANCE_CEILING = 1.75  # see module docstring. Chroma default = squared L2 on normalized embeddings, so max meaningful distance is ~2.0 (opposite vectors). 1.75 only screens out near-total unrelatedness.
 
 
 SYSTEM_PROMPT = """You are a rulebook assistant for a university. You answer ONLY from the passages given to you below -- never from general knowledge about how universities "usually" work, and never by filling gaps with reasonable-sounding assumptions.
 
-You must classify every question into exactly one of three states:
+Follow this decision procedure, in order, for every question:
 
-1. "ANSWERED" -- one or more passages directly and unambiguously answer the question, and all relevant passages agree with each other.
+STEP 1 -- Find every retrieved passage that directly states a specific answer to the question (a number, a time, a rule, a yes/no). Ignore passages that are merely topically related but don't actually state an answer to THIS question.
 
-2. "NOT_FOUND" -- the passages do not directly address the specific question asked. This is the correct state even when the passages cover an ADJACENT or SIMILAR situation but not the one actually asked about. For example: if the question asks about missing an exam due to a family wedding, and the passages only grant relief for medical reasons, that is NOT_FOUND -- do not extend a medical-only provision to a non-medical scenario, even if it seems like it "should" apply. Being asked about something plausible-sounding is not the same as it being covered. When in doubt about whether a passage truly covers the scenario as opposed to something merely similar, prefer NOT_FOUND.
+STEP 2 -- Look at what you found in Step 1:
+  (a) If exactly one value/answer emerges, and all passages that address it agree -> state is "ANSWERED". This is the most common case. Cite the passage(s).
+  (b) If two or more passages each state a specific value for the SAME quantity the question asks about, and those values genuinely differ (different numbers, different times, different rules for the same thing) -> state is "CONTRADICTION". Cite all conflicting passages. This includes subtle cases: a passage that explicitly claims to quote another passage's number but gets it wrong; an introductory/definitional statement of a value versus a later operative section stating a different value for the same thing; and passages from the SAME document just as much as passages from different files. You do not need any passage to say "these conflict" in words -- recognizing that two stated values for the same quantity disagree is your job as the reader.
 
-3. "CONTRADICTION" -- two or more retrieved passages address the SAME question but give answers that cannot both be true (different numbers, different rules, incompatible procedures). Report both sides.
+  CRITICAL RULE -- do not resolve conflicts yourself: If two retrieved passages directly answer the same question but provide different values, return CONTRADICTION even if one passage appears more authoritative, more specific, more operational, newer-looking, or is located in a numbered/operative section. A passage that looks more "official" (e.g. one written specifically about the topic the question asks, versus one that only establishes the number in a more general section) is NOT automatically the correct one -- it is exactly as likely to be the erroneous one. Do not pick a side. Report both.
 
-Rules for ANSWERED:
-- Only use ANSWERED if you would be comfortable being quoted on it to a student who will act on your answer.
-- You may combine multiple consistent passages into one answer.
-- You may NOT extend a rule to a situation it does not literally cover, no matter how similar.
+  Worked example 1 (C1-style): Section 3 establishes 75% attendance for examination eligibility. Section 12.3 says the Scholarship Committee applies an 80% attendance requirement, explicitly claiming to be quoting the figure "as specified in Section 3." For a question about the attendance percentage required to continue receiving a scholarship: both 75% (Section 3, the actual source being cited) and 80% (Section 12.3, which is quoting it incorrectly) are directly relevant stated values for the same quantity. This is CONTRADICTION. Do NOT simply choose 80% just because Section 12.3 is the passage that specifically discusses scholarship continuation -- the fact that it cites Section 3 means Section 3's actual value is equally part of the answer, and the two disagree.
 
-Rules for CONTRADICTION:
-- Only use CONTRADICTION when the SAME question genuinely gets two incompatible answers from the corpus, not just two passages that are merely related.
-- Do not manufacture a contradiction between a general rule and a narrower exception to it -- that is normal legal structure, not a contradiction. A real contradiction is when two passages claim to state the SAME threshold/number/rule and disagree.
-- A contradiction can be subtle: one passage may state a number or rule directly, while a second passage explicitly claims to be quoting or referencing the first passage's number but states a DIFFERENT one (e.g. Passage A says "75%"; Passage B says "the 80% requirement specified in Section X" where Section X is actually Passage A). This is still a contradiction even though the two passages don't look symmetric -- one is a plain statement, the other is a misquote of it. Do not resolve it by assuming the plain statement is "obviously" correct; report both.
-- If one retrieved passage is a meta/administrative note that says something like "two different figures exist for this, staff should use the current circular's number and flag the discrepancy" -- that note is CONFIRMING a contradiction exists, not resolving it. Do not treat such a note as authorizing you to pick one number as the answer. If the underlying conflicting values are visible anywhere in the retrieved passages (directly stated or referenced by the meta-note), classify as CONTRADICTION and report both underlying values, not the meta-note's procedural advice.
-- If you strongly suspect a contradiction exists (e.g. a meta-note references two calculation methods) but the retrieved passages only contain ONE of the two actual conflicting values spelled out, still classify as CONTRADICTION if the meta-note itself names or clearly implies what the second value/method is, and cite both the meta-note and the passage with the value you do have.
+  Worked example 2 (C3-style): A hostel handbook's Scope section says "the standard night curfew is 11:00 PM." A later operative section (5.1) says "residents must be back by 10:00 PM." For "What time is the hostel curfew?": this is CONTRADICTION. Do NOT simply choose the 10:00 PM operative-sounding rule just because it appears in the section literally titled "Curfew Policy" with more procedural detail -- a plainly stated value in an earlier section is just as much a stated answer as a more detailed one later.
 
-Rules for NOT_FOUND:
-- Do not refuse just because the answer requires connecting two consistent passages together -- that is still ANSWERED.
-- Do not refuse just because the passage doesn't use the exact words in the question -- if the substance is clearly covered, that is ANSWERED.
-- DO refuse (NOT_FOUND) if the question describes a scenario, exception, or circumstance the passages simply never mention, even if a similar-sounding scenario is covered.
-- Do NOT silently carry a rule from one section into a neighboring section that never restates or explicitly extends it, even if it seems like it "probably" should apply. Two examples of this exact mistake to avoid:
-  - A passage states a mechanism applies "in full" to a later context (e.g. "Summer Term attendance follows Section 3 in full"), but a DIFFERENT, separate mechanism (e.g. a medical-adjustment provision that modifies how Section 3 is computed) is never explicitly said to carry over too. Whether "follows Section 3 in full" also drags in an adjustment mechanism attached to Section 3 elsewhere is not stated -- that gap is NOT_FOUND, not an inference you should complete.
-  - A passage states an eligibility rule for one category of role (e.g. "two completed semesters" for Council-wide offices), and a separate passage describes a related-but-distinct role (e.g. Class Representative) without repeating, cross-referencing, or excluding that rule. Do not assume the first rule silently applies to the second just because the roles are similar -- that is filling a gap, not reading a passage. This is NOT_FOUND.
-  - When a specific provision (like an installment payment plan) modifies one variable (fee amounts/timing) but a related process (like provisional cancellation timelines) is described elsewhere for the general case, do not assume the general process transfers unchanged to the modified case unless a passage says so explicitly. This is NOT_FOUND.
+  This CONTRADICTION rule applies only when both passages are directly answering the SAME question/quantity -- do not manufacture a contradiction out of unrelated numbers that happen to appear in nearby or topically-related passages, and do not treat two passages as conflicting just because they are both "about" the general topic without both stating a value for the specific thing asked.
+
+  (c) If Step 1 found nothing -- no passage actually states an answer to the specific question asked, only adjacent or similar material -- state is "NOT_FOUND".
+
+STEP 3 -- Before finalizing ANSWERED, double check you are not silently extending a rule to a scenario it doesn't literally cover. Two failure patterns to avoid:
+  - A passage states a mechanism applies "in full" to a context, but a DIFFERENT related mechanism (e.g. an adjustment/exception attached elsewhere to the same topic) is never explicitly said to carry over too -- don't assume it does. NOT_FOUND.
+  - A passage states an eligibility/process rule for one category, and a separate passage describes a related-but-distinct category without repeating or cross-referencing that rule -- don't assume the first rule silently applies to the second just because they're similar. NOT_FOUND.
+  - Example: Q: "If I miss the second installment of an approved installment plan, does the normal provisional-cancellation process apply the same way?" The installment passage describes its own terms but never states the general cancellation timeline applies unchanged to a missed installment. No passage makes that connection explicitly -> NOT_FOUND, even though it would "logically" seem to apply.
+  This caution is about inferring RULES/MECHANISMS across sections -- it does NOT apply to Step 2(a)/(b), which is just reading and comparing values that are already directly stated. Do not use this caution to talk yourself out of an ANSWERED or CONTRADICTION that Step 1-2 already found directly stated in the text.
+
+Being asked about something plausible-sounding is not the same as it being covered -- but being covered by a single clear, directly-stated passage IS enough for ANSWERED. Most questions in this system are perfectly clearly answered by one passage; NOT_FOUND and CONTRADICTION are the exceptions, not the default.
 
 You must respond with ONLY valid JSON (no markdown fences, no preamble, no commentary outside the JSON) matching exactly this schema:
 
@@ -87,7 +84,18 @@ You must respond with ONLY valid JSON (no markdown fences, no preamble, no comme
   "reasoning": "<one or two sentences on why you chose this state, for audit purposes>"
 }
 
-For NOT_FOUND, "citations" may be an empty list, or may include passages you checked and ruled out as not actually covering the scenario (useful for showing your work).
+Concrete worked example of a correctly-formatted response ("citations" is always a list of OBJECTS with three keys, never bare strings):
+
+{
+  "state": "ANSWERED",
+  "answer": "A student must maintain at least 75% attendance in a course to sit that course's end-semester exam.",
+  "citations": [
+    {"chunk_id": "a1b2c3d4e5f6", "source_file": "regulations.md", "section": "Section 3: Attendance Requirement for Examination Eligibility"}
+  ],
+  "reasoning": "Section 3.2 states this threshold directly and no other passage contradicts it."
+}
+
+For NOT_FOUND, "citations" may be an empty list, or may include passages you checked and ruled out (still as objects in the same shape).
 For CONTRADICTION, "citations" must include the chunk_id/source_file/section for BOTH conflicting passages.
 Never invent a chunk_id, source_file, or section that was not given to you below.
 """
@@ -108,14 +116,30 @@ Respond with the JSON object only."""
 
 
 def _extract_json(raw_text):
-    """Strip <think>...</think> blocks (qwen3 is a 'thinking' model and may leak
-    these even with think=False on some Ollama versions), then strip markdown
-    fences if present, then parse."""
+    """Strip any stray <think>...</think> blocks as a defensive safety net
+    (harmless no-op for non-thinking models; guards against any future model
+    swap to a reasoning model that leaks these), then strip markdown fences
+    if present, then parse."""
     text = raw_text.strip()
     text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
     text = re.sub(r"^```(?:json)?\s*", "", text)
     text = re.sub(r"\s*```$", "", text)
     return json.loads(text)
+
+
+def _normalize_citations(citations):
+    """Coerce citations into a consistent list-of-dicts shape, even if a
+    weaker model returns bare strings (e.g. just a chunk_id) instead of
+    objects. Prevents downstream code from crashing on c.get(...)."""
+    if not isinstance(citations, list):
+        return []
+    normalized = []
+    for c in citations:
+        if isinstance(c, dict):
+            normalized.append(c)
+        else:
+            normalized.append({"chunk_id": str(c), "source_file": None, "section": None})
+    return normalized
 
 
 def answer_question(question, k=TOP_K, verbose=False):
@@ -144,7 +168,6 @@ def answer_question(question, k=TOP_K, verbose=False):
                 messages=messages,
                 format="json",
                 options={"temperature": 0, "num_predict": 1536},
-                think=False,  # qwen3:4b is a thinking model -- turn off <think> blocks, they break JSON parsing
             )
             raw = response["message"]["content"]
             break
@@ -184,7 +207,6 @@ def answer_question(question, k=TOP_K, verbose=False):
                 ],
                 format="json",
                 options={"temperature": 0, "num_predict": 1536},
-                think=False,
             )
             raw_repair = repair_response["message"]["content"]
             parsed = _extract_json(raw_repair)
@@ -200,6 +222,7 @@ def answer_question(question, k=TOP_K, verbose=False):
     parsed.setdefault("answer", "")
     parsed.setdefault("citations", [])
     parsed.setdefault("reasoning", "")
+    parsed["citations"] = _normalize_citations(parsed["citations"])
     parsed["_retrieved_chunks"] = chunks
     return parsed
 

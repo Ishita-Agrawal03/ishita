@@ -1,18 +1,18 @@
 {
   "summary": {
     "total": 41,
-    "correct": 20,
+    "correct": 35,
     "by_bucket": {
       "answerable": {
-        "correct": 13,
+        "correct": 9,
         "total": 13
       },
       "contradiction": {
-        "correct": 2,
+        "correct": 3,
         "total": 3
       },
       "unanswerable": {
-        "correct": 5,
+        "correct": 23,
         "total": 25
       }
     }
@@ -25,7 +25,7 @@
       "expected_state": "ANSWERED",
       "actual_state": "ANSWERED",
       "correct": true,
-      "answer": "Section\u202f3 sets the minimum attendance at 75% of classes for a student to be eligible to sit for the End\u2011Semester Examination.",
+      "answer": "A student must maintain at least 75% attendance in a course to sit for the end-semester exam.",
       "citations": [
         {
           "chunk_id": "7f84e49b1bf4",
@@ -33,29 +33,18 @@
           "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
         }
       ],
-      "reasoning": "The passage explicitly states a 75% attendance floor for exam eligibility, directly answering the question."
+      "reasoning": "Section 3.2 directly states the 75% attendance requirement for examination eligibility, and no other passage contradicts this specific value."
     },
     {
       "id": "A2",
       "bucket": "answerable",
       "question": "What is the minimum CGPA a student must maintain to avoid being placed on Academic Probation?",
       "expected_state": "ANSWERED",
-      "actual_state": "ANSWERED",
-      "correct": true,
-      "answer": "A student must maintain a CGPA of at least\u202f5.0 to avoid being placed on Academic Probation.",
-      "citations": [
-        {
-          "chunk_id": "648424e1de6f",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 5: Minimum CGPA and Academic Probation"
-        },
-        {
-          "chunk_id": "7b01c9aa83ea",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Appendix A: Definitions"
-        }
-      ],
-      "reasoning": "Section\u202f5.1 and 5.2 explicitly state the 5.0 CGPA threshold for good standing and for avoiding probation, and no conflicting passages were found."
+      "actual_state": "NOT_FOUND",
+      "correct": false,
+      "answer": "",
+      "citations": [],
+      "reasoning": ""
     },
     {
       "id": "A3",
@@ -64,7 +53,7 @@
       "expected_state": "ANSWERED",
       "actual_state": "ANSWERED",
       "correct": true,
-      "answer": "A student can request revaluation of an End\u2011Semester Examination answer script within seven working days of the result declaration.",
+      "answer": "A student may request revaluation of an End-Semester Examination answer script within seven working days of result declaration.",
       "citations": [
         {
           "chunk_id": "21dd08400f0a",
@@ -72,24 +61,18 @@
           "section": "Institute of Applied Sciences and Technology > Section 4: Internal Assessment and Grading"
         }
       ],
-      "reasoning": "Section 4.4 explicitly states the revaluation request must be made within seven working days of result declaration, providing a direct answer."
+      "reasoning": "Section 4.4 of the regulations directly states the timeframe for requesting revaluation."
     },
     {
       "id": "A4",
       "bucket": "answerable",
       "question": "What is the tuition fee for a UG student in the Odd semester of 2025-26?",
       "expected_state": "ANSWERED",
-      "actual_state": "ANSWERED",
-      "correct": true,
-      "answer": "The tuition fee for an undergraduate (UG) student in the Odd semester of the 2025\u201126 academic year is \u20b91,25,000 per semester.",
-      "citations": [
-        {
-          "chunk_id": "1a65b79b837d",
-          "source_file": "fee_deadlines.md",
-          "section": "Fee Schedule \u2014 Academic Year 2025\u201326 > Odd Semester (July\u2013December 2025)"
-        }
-      ],
-      "reasoning": "The fee schedule table for the Odd semester explicitly lists the tuition fee for all UG students as \u20b91,25,000, directly answering the question."
+      "actual_state": "NOT_FOUND",
+      "correct": false,
+      "answer": "",
+      "citations": [],
+      "reasoning": ""
     },
     {
       "id": "A5",
@@ -98,7 +81,7 @@
       "expected_state": "ANSWERED",
       "actual_state": "ANSWERED",
       "correct": true,
-      "answer": "No. Overnight stays by guests are not permitted in student rooms under any circumstances; guests may only visit common areas during designated hours.",
+      "answer": "Overnight stays by guests are not permitted in student rooms under any circumstances.",
       "citations": [
         {
           "chunk_id": "e9fbe82eaf40",
@@ -106,7 +89,7 @@
           "section": "1. Scope > 4. Guest Policy"
         }
       ],
-      "reasoning": "The Guest Policy explicitly states that overnight stays by guests are prohibited in student rooms, directly answering the question."
+      "reasoning": "Section 4.2 of the Hostel Policy explicitly states that overnight stays by guests are not permitted in student rooms."
     },
     {
       "id": "A6",
@@ -115,7 +98,7 @@
       "expected_state": "ANSWERED",
       "actual_state": "ANSWERED",
       "correct": true,
-      "answer": "A new student Society must have at least fifteen founding members to be eligible for registration.",
+      "answer": "A new student Society must have at least fifteen founding members to register.",
       "citations": [
         {
           "chunk_id": "e6e84fd0a5c6",
@@ -123,41 +106,29 @@
           "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 4: Recognition of Societies"
         }
       ],
-      "reasoning": "Article 4.1 explicitly states the requirement of a list of at least fifteen founding members for a new Society seeking recognition."
+      "reasoning": "Article 4.1 of the Constitution of the Institute Student Council and Affiliated Societies explicitly states the requirement for at least fifteen founding members."
     },
     {
       "id": "A7",
       "bucket": "answerable",
       "question": "Can a student report ragging anonymously?",
       "expected_state": "ANSWERED",
-      "actual_state": "ANSWERED",
-      "correct": true,
-      "answer": "Yes. A student may report ragging anonymously through the Institute's helpline, and any disclosed identity is protected as far as the law allows.",
-      "citations": [
-        {
-          "chunk_id": "399dc4e07579",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 17: Anti-Ragging and Student Conduct"
-        }
-      ],
-      "reasoning": "Section 17.3 explicitly states that ragging reports can be made anonymously, directly answering the question."
+      "actual_state": "NOT_FOUND",
+      "correct": false,
+      "answer": "",
+      "citations": [],
+      "reasoning": ""
     },
     {
       "id": "A8",
       "bucket": "answerable",
       "question": "What CGPA must a Merit Scholarship recipient maintain to continue receiving it?",
       "expected_state": "ANSWERED",
-      "actual_state": "ANSWERED",
-      "correct": true,
-      "answer": "A Merit Scholarship recipient must maintain a cumulative GPA of at least\u202f8.0 to continue receiving the scholarship.",
-      "citations": [
-        {
-          "chunk_id": "802711830ef4",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 8: Scholarships and Financial Aid"
-        }
-      ],
-      "reasoning": "Section\u202f8.2 explicitly states the required CGPA for Merit Scholarship continuation, and no contradictory information is present."
+      "actual_state": "NOT_FOUND",
+      "correct": false,
+      "answer": "",
+      "citations": [],
+      "reasoning": ""
     },
     {
       "id": "A9",
@@ -166,7 +137,7 @@
       "expected_state": "ANSWERED",
       "actual_state": "ANSWERED",
       "correct": true,
-      "answer": "A student who arrives more than 30 minutes after the start of an examination will not be permitted to enter the examination hall.",
+      "answer": "A student arriving more than 30 minutes after the start of an examination will not be permitted to enter the examination hall.",
       "citations": [
         {
           "chunk_id": "2db4b4308c88",
@@ -174,7 +145,7 @@
           "section": "Institute of Applied Sciences and Technology > Section 10: Examination Conduct"
         }
       ],
-      "reasoning": "The passage explicitly states the 30\u2011minute threshold for late entry, directly answering the question with no conflicting information."
+      "reasoning": "Section 10.3 of the regulations directly states the threshold for late entry to an examination."
     },
     {
       "id": "A10",
@@ -183,7 +154,7 @@
       "expected_state": "ANSWERED",
       "actual_state": "ANSWERED",
       "correct": true,
-      "answer": "The maximum permitted duration of the B.Tech programme, including any Medical Leave of Absence, is fourteen semesters.",
+      "answer": "The maximum permitted duration of the B.Tech programme, including Medical Leave of Absence, is fourteen semesters.",
       "citations": [
         {
           "chunk_id": "f62cbdd6b50d",
@@ -191,7 +162,7 @@
           "section": "Institute of Applied Sciences and Technology > Section 14: Degree Requirements and Duration"
         }
       ],
-      "reasoning": "The passage explicitly states the maximum permitted duration, including medical leave, is fourteen semesters, with no conflicting information."
+      "reasoning": "Section 14.1 of the regulations directly states the maximum permitted duration of the B.Tech programme, including Medical Leave of Absence."
     },
     {
       "id": "A11",
@@ -200,128 +171,7 @@
       "expected_state": "ANSWERED",
       "actual_state": "ANSWERED",
       "correct": true,
-      "answer": "Missing classes for your sister's wedding is considered a personal/family function, which is not covered by the attendance\u2011condonation provisions. Therefore you must still achieve at least 75% attendance; if you fall below that you will be awarded an \u201cI\u201d (Ineligible) grade for the End\u2011Semester Examination and will not be allowed to sit the exam.",
-      "citations": [
-        {
-          "chunk_id": "1c610bf397aa",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
-        },
-        {
-          "chunk_id": "4b7fb2c9120d",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
-        }
-      ],
-      "reasoning": "The passages explicitly state that family functions/personal travel are not eligible for attendance condonation (3.5) and that falling below 75% attendance results in an \"I\" grade (3.3), directly answering the question."
-    },
-    {
-      "id": "A12",
-      "bucket": "answerable",
-      "question": "Can I get my attendance shortfall condoned if I was traveling internationally for personal reasons during the semester?",
-      "expected_state": "ANSWERED",
-      "actual_state": "ANSWERED",
-      "correct": true,
-      "answer": "No. The regulations state there is no provision for condoning attendance shortfalls that arise from personal travel (or similar private commitments) unless they fall under the specific exceptions listed in Section\u202f3.4 or the Medical Exemption Clause. Personal international travel is therefore not eligible for attendance condonation.",
-      "citations": [
-        {
-          "chunk_id": "4b7fb2c9120d",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
-        },
-        {
-          "chunk_id": "ddbfe13d9f01",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
-        }
-      ],
-      "reasoning": "The passages explicitly say personal travel is not covered for condonation, providing a direct answer to the question."
-    },
-    {
-      "id": "A13",
-      "bucket": "answerable",
-      "question": "Does attending my sibling's graduation ceremony count toward the Medical Exemption Clause?",
-      "expected_state": "ANSWERED",
-      "actual_state": "ANSWERED",
-      "correct": true,
-      "answer": "No. Attending a sibling's graduation is a family function and is not covered by the Medical Exemption Clause. Such events are treated under Section\u202f3.5 and do not qualify for attendance\u2011denominator adjustment.",
-      "citations": [
-        {
-          "chunk_id": "4b7fb2c9120d",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
-        },
-        {
-          "chunk_id": "ddbfe13d9f01",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
-        }
-      ],
-      "reasoning": "The passages explicitly state that family functions and personal travel are not covered by the Medical Exemption Clause and are governed by Section\u202f3.5, which does not allow attendance adjustment."
-    },
-    {
-      "id": "C1",
-      "bucket": "contradiction",
-      "question": "What attendance percentage does a student need to maintain to continue receiving their scholarship?",
-      "expected_state": "CONTRADICTION",
-      "actual_state": "NOT_FOUND",
-      "correct": false,
-      "answer": "Internal error: the model's response could not be parsed as valid JSON. Treating as unanswered for safety.",
-      "citations": [],
-      "reasoning": "JSON parse error: Unterminated string starting at: line 6 column 6 (char 619). Raw output: {\n  \"state\": \"CONTRADICTION\",\n  \"answer\": \"One passage states that a student must maintain at least 75% attendance (Section\u202f3.2) to be eligible for examinations, which is the attendance floor referenced for scholarship standing. Another passage says the Scholarship Committee applies an attendance re"
-    },
-    {
-      "id": "C2",
-      "bucket": "contradiction",
-      "question": "How much is the late fee if I pay my tuition fee one week late?",
-      "expected_state": "CONTRADICTION",
-      "actual_state": "CONTRADICTION",
-      "correct": true,
-      "answer": "One source says the late fee is 2% of the total outstanding tuition fee for each week of delay (compounded weekly), while another source says the late fee is a flat charge of \u20b9500 per week (or part thereof). Both statements apply to a one\u2011week delay, but they conflict.",
-      "citations": [
-        {
-          "chunk_id": "91646c01c019",
-          "source_file": "fee_deadlines.md",
-          "section": "Fee Schedule \u2014 Academic Year 2025\u201326 > Late Payment Policy"
-        },
-        {
-          "chunk_id": "ffdf2c1521bd",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 9: Fee Payment"
-        }
-      ],
-      "reasoning": "Two passages address the same question (late fee for a week) but give different calculation methods, creating a direct contradiction."
-    },
-    {
-      "id": "C3",
-      "bucket": "contradiction",
-      "question": "What time is the hostel curfew?",
-      "expected_state": "CONTRADICTION",
-      "actual_state": "CONTRADICTION",
-      "correct": true,
-      "answer": "One passage says the hostel curfew is 10:00\u202fPM, while another passage says the standard hostel curfew is 11:00\u202fPM.",
-      "citations": [
-        {
-          "chunk_id": "0df2d590f007",
-          "source_file": "hostel_policy.pdf",
-          "section": "1. Scope > 5. Curfew and Night-Out Policy"
-        },
-        {
-          "chunk_id": "e4df0dc08fd2",
-          "source_file": "hostel_policy.pdf",
-          "section": "1. Scope"
-        }
-      ],
-      "reasoning": "Two passages address the same question (hostel curfew time) but give different times (10:00\u202fPM vs 11:00\u202fPM), creating a direct contradiction."
-    },
-    {
-      "id": "U4",
-      "bucket": "unanswerable",
-      "question": "If I represent my city (not the Institute) in a personal, non-Institute-affiliated hackathon, can that count as grounds for attendance condonation?",
-      "expected_state": "NOT_FOUND",
-      "actual_state": "NOT_FOUND",
-      "correct": true,
-      "answer": "The regulations only allow attendance condonation for Institute\u2011sanctioned activities (e.g., Institute sporting or cultural events, placement interviews, bereavement) as stated in Section\u202f3.4, and explicitly state there is no provision for personal travel, family functions, or private commitments not covered by Section\u202f3.4 (Section\u202f3.5). A personal, non\u2011Institute\u2011affiliated hackathon representing your city does not fall under any of these listed categories, so the passages do not address it as grounds for condonation.",
+      "answer": "If you miss classes due to attending your sister's wedding out of town, you will not be eligible for attendance condonation under Section 3.4, as it only covers circumstances beyond your control such as bereavement or Institute-sanctioned events. Therefore, you must maintain at least 75% attendance to sit the End-Semester Examination.",
       "citations": [
         {
           "chunk_id": "db4b1eebaf7b",
@@ -334,16 +184,143 @@
           "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
         }
       ],
-      "reasoning": "No passage directly covers attendance condonation for a personal, non\u2011Institute hackathon; the relevant sections only list Institute\u2011sanctioned events and exclude private commitments."
+      "reasoning": "Section 3.4 explicitly states that condonation is only granted for circumstances beyond the student's control, such as bereavement or Institute-sanctioned events, and does not include personal travel or family functions."
+    },
+    {
+      "id": "A12",
+      "bucket": "answerable",
+      "question": "Can I get my attendance shortfall condoned if I was traveling internationally for personal reasons during the semester?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "No, attendance shortfalls arising from personal travel, including international travel, are not eligible for condonation under the Institute's regulations.",
+      "citations": [
+        {
+          "chunk_id": "4b7fb2c9120d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        }
+      ],
+      "reasoning": "Section 3.5 explicitly states that personal travel does not qualify for condonation of attendance shortfall."
+    },
+    {
+      "id": "A13",
+      "bucket": "answerable",
+      "question": "Does attending my sibling's graduation ceremony count toward the Medical Exemption Clause?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "Attending a sibling's graduation ceremony does not count toward the Medical Exemption Clause and is not condoned under the attendance requirement.",
+      "citations": [
+        {
+          "chunk_id": "4b7fb2c9120d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "ddbfe13d9f01",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        }
+      ],
+      "reasoning": "Section 3.5 explicitly states that personal travel and family functions do not qualify for condonation under the Medical Exemption Clause, and Section 7.5 reiterates that leave of absence for family events does not qualify for attendance adjustment."
+    },
+    {
+      "id": "C1",
+      "bucket": "contradiction",
+      "question": "What attendance percentage does a student need to maintain to continue receiving their scholarship?",
+      "expected_state": "CONTRADICTION",
+      "actual_state": "CONTRADICTION",
+      "correct": true,
+      "answer": "The attendance percentage required to continue receiving a scholarship is stated as 75% in Section 3.2, but Section 12.3 incorrectly states it as 80%.",
+      "citations": [
+        {
+          "chunk_id": "7f84e49b1bf4",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "7fa31d5deb0d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 12: Committee Powers and Waivers"
+        }
+      ],
+      "reasoning": "Section 3.2 directly states the 75% attendance requirement for examination eligibility, which is referenced for scholarship continuation. However, Section 12.3 incorrectly states an 80% requirement, creating a contradiction."
+    },
+    {
+      "id": "C2",
+      "bucket": "contradiction",
+      "question": "How much is the late fee if I pay my tuition fee one week late?",
+      "expected_state": "CONTRADICTION",
+      "actual_state": "CONTRADICTION",
+      "correct": true,
+      "answer": "The late fee is either 2% of the total outstanding fee amount for every week of delay, compounding weekly, or a flat charge of \u20b9500 per week or part thereof of delay, applied uniformly regardless of the total fee amount outstanding.",
+      "citations": [
+        {
+          "chunk_id": "91646c01c019",
+          "source_file": "fee_deadlines.md",
+          "section": "Fee Schedule \u2014 Academic Year 2025\u201326 > Late Payment Policy"
+        },
+        {
+          "chunk_id": "ffdf2c152000",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 9.2"
+        }
+      ],
+      "reasoning": ""
+    },
+    {
+      "id": "C3",
+      "bucket": "contradiction",
+      "question": "What time is the hostel curfew?",
+      "expected_state": "CONTRADICTION",
+      "actual_state": "CONTRADICTION",
+      "correct": true,
+      "answer": "The hostel curfew is stated to be 11:00 PM in the Scope section, but the Curfew and Night-Out Policy section states that residents must be back by 10:00 PM.",
+      "citations": [
+        {
+          "chunk_id": "e4df0dc08fd2",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope"
+        },
+        {
+          "chunk_id": "0df2d590f007",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope > 5. Curfew and Night-Out Policy"
+        }
+      ],
+      "reasoning": "The Scope section explicitly states the standard night curfew is 11:00 PM, while the Curfew and Night-Out Policy section states residents must be back by 10:00 PM."
+    },
+    {
+      "id": "U4",
+      "bucket": "unanswerable",
+      "question": "If I represent my city (not the Institute) in a personal, non-Institute-affiliated hackathon, can that count as grounds for attendance condonation?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations do not provide for attendance condonation based on participation in personal, non-Institute-affiliated hackathons. The rules only mention condonation for circumstances beyond the student's control, such as Institute-sanctioned events or bereavement, and do not include personal hackathons.",
+      "citations": [
+        {
+          "chunk_id": "db4b1eebaf7b",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "4b7fb2c9120d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        }
+      ],
+      "reasoning": "The passages specify that condonation is only granted for circumstances beyond the student's control, such as Institute-sanctioned events or bereavement, and do not mention personal hackathons."
     },
     {
       "id": "U5",
       "bucket": "unanswerable",
       "question": "Does the Medical Exemption's attendance denominator adjustment (Section 7.2) still apply if the medical absence happens during the Summer Term?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "NOT_FOUND",
-      "correct": true,
-      "answer": "The regulations do not explicitly state whether the attendance denominator adjustment described in Section\u202f7.2 applies to a medical absence that occurs during the Summer Term. Section\u202f13.2 says Summer Term attendance follows Section\u202f3 in full, and Section\u202f7.2 describes the adjustment for a semester, but there is no direct provision linking the two for the Summer Term.",
+      "actual_state": "ANSWERED",
+      "correct": false,
+      "answer": "The Medical Exemption's attendance denominator adjustment (Section 7.2) still applies if the medical absence happens during the Summer Term.",
       "citations": [
         {
           "chunk_id": "be8fcc04d012",
@@ -353,24 +330,34 @@
         {
           "chunk_id": "f0b3fccc4058",
           "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 13: Summer Term"
+          "section": "Institute of Applied Sciences and Technology > Appendix B: Cross-Reference Notes for Administrative Staff"
         },
         {
-          "chunk_id": "fad757c23ee9",
+          "chunk_id": "1561fd7b2504",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        },
+        {
+          "chunk_id": "f0b3fccc4058",
           "source_file": "regulations.md",
           "section": "Institute of Applied Sciences and Technology > Appendix B: Cross-Reference Notes for Administrative Staff"
+        },
+        {
+          "chunk_id": "13.2",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 13: Summer Term"
         }
       ],
-      "reasoning": "No passage directly addresses the applicability of the Section\u202f7.2 denominator adjustment to Summer Term situations; the relevant sections discuss each provision separately without linking them."
+      "reasoning": "Section 7.2 explicitly states the Medical Exemption's attendance denominator adjustment applies, and Section 13.2 confirms that Summer Term follows Section 3 in full, without any indication that Section 7 is excluded."
     },
     {
       "id": "U6",
       "bucket": "unanswerable",
       "question": "If a Merit Scholarship recipient's CGPA drops because they took a Medical Leave of Absence semester, does the scholarship get paused rather than permanently lost?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ANSWERED",
-      "correct": false,
-      "answer": "No. According to the regulations, a Merit Scholarship recipient must keep a CGPA of at least 8.0. If the CGPA falls below 8.0 in any semester, the scholarship is lost for the next semester, though the student may reapply once the CGPA rises again. There is no provision that the scholarship is merely paused because the drop was due to a medical leave of absence.",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations do not specify whether a Merit Scholarship recipient's scholarship is paused or permanently lost if their CGPA drops due to a Medical Leave of Absence semester. The rules cover CGPA requirements and medical leaves separately but do not address the interaction between these two scenarios.",
       "citations": [
         {
           "chunk_id": "802711830ef4",
@@ -378,12 +365,12 @@
           "section": "Institute of Applied Sciences and Technology > Section 8: Scholarships and Financial Aid"
         },
         {
-          "chunk_id": "12.3",
+          "chunk_id": "309155b895bb",
           "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 12: Committee Powers and Waivers"
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
         }
       ],
-      "reasoning": "Section 8.2 explicitly states that a Merit Scholarship is lost if CGPA drops below 8.0, with no mention of a pause; thus the question is directly answered."
+      "reasoning": "The passages cover CGPA requirements and medical leaves separately, but do not address the specific scenario of a scholarship recipient's CGPA dropping due to a medical leave of absence."
     },
     {
       "id": "U7",
@@ -392,20 +379,9 @@
       "expected_state": "NOT_FOUND",
       "actual_state": "NOT_FOUND",
       "correct": true,
-      "answer": "The regulations give a specific procedural review process for Academic Integrity Committee decisions in Section\u202f6.5, and Section\u202f11 on Grievance Redressal only covers certain academic grievances such as grading disputes beyond Section\u202f4.4/4.5, harassment and discrimination. It does not provide a mechanism to challenge an Academic Integrity Committee finding through the Grievance Redressal Committee. Therefore, the scenario of using the GRC instead of the Section\u202f6.5 procedural review is not addressed in the provided passages.",
-      "citations": [
-        {
-          "chunk_id": "93821ee225e2",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 6: Academic Integrity"
-        },
-        {
-          "chunk_id": "e0de5e77f3df",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 11: Grievance Redressal"
-        }
-      ],
-      "reasoning": "No passage explicitly allows a student to use the Grievance Redressal Committee to challenge an Academic Integrity Committee finding; only Section\u202f6.5 provides a review route, so the question is not covered."
+      "answer": "",
+      "citations": [],
+      "reasoning": ""
     },
     {
       "id": "U8",
@@ -414,20 +390,20 @@
       "expected_state": "NOT_FOUND",
       "actual_state": "NOT_FOUND",
       "correct": true,
-      "answer": "The regulations specify that a second proven instance of academic dishonesty results in expulsion (Section\u202f6.4) and that there is no appeal provision beyond a procedural review (Section\u202f6.5). However, none of the provided passages contain any rule or provision that addresses whether a expelled student may reapply for admission in a later year. Therefore, the specific question of re\u2011application after expulsion is not covered by the given regulations.",
+      "answer": "The specific scenario of whether a student who misses the second installment of an approved installment plan faces the same provisional cancellation process as a student who misses the first installment is not addressed in the provided passages. The passages cover installment plans and cancellation processes generally but do not specify different rules for missing subsequent installments.",
       "citations": [
         {
-          "chunk_id": "93821ee225e2",
+          "chunk_id": "a1b2c3d4e5f6",
           "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 6: Academic Integrity"
+          "section": "Section 2: Registration and Withdrawal Procedures"
         },
         {
-          "chunk_id": "93821ee225e2",
-          "source_file": "regulations.md",
-          "section": "Institute of Applied Sciences and Technology > Section 6: Academic Integrity"
+          "chunk_id": "g7h8i9j0k1l2",
+          "source_file": "refund_policy.md",
+          "section": "withdrawal_before_classes"
         }
       ],
-      "reasoning": "The passages describe expulsion and lack of appeal but do not mention any mechanism for future re\u2011application, so the scenario is not addressed."
+      "reasoning": "No passage directly addresses the specific scenario of missing a subsequent installment plan payment and its consequences."
     },
     {
       "id": "U9",
@@ -436,7 +412,7 @@
       "expected_state": "NOT_FOUND",
       "actual_state": "NOT_FOUND",
       "correct": true,
-      "answer": "Article 6.4 explicitly requires Dean of Student Affairs approval only for Society events that extend past 9:00\u202fPM on a weekday. The constitution does not contain any provision that extends this requirement to events on Saturdays, so the specific scenario of a Saturday event past 9:00\u202fPM is not addressed.",
+      "answer": "The specific requirement for Dean approval for Society events running past 9:00 PM on a Saturday is not addressed in the provided passages. Article 6.4 only mentions weekday events, and no other passage explicitly covers Saturday events.",
       "citations": [
         {
           "chunk_id": "c9ee7ef67626",
@@ -444,7 +420,7 @@
           "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 6: Events and External Sponsorship"
         }
       ],
-      "reasoning": "The passage covers weekday events only and provides no rule for Saturday events; therefore the question is not answered by the given texts."
+      "reasoning": "The passages do not provide a specific rule for Dean approval for events on Saturdays, only for weekdays."
     },
     {
       "id": "U10",
@@ -453,7 +429,7 @@
       "expected_state": "NOT_FOUND",
       "actual_state": "ANSWERED",
       "correct": false,
-      "answer": "Yes. The two\u2011semester completion rule applies only to the General, Cultural, Technical and Sports Secretary positions; the Constitution does not impose any semester\u2011completion requirement for Class Representatives, so a first\u2011year student can be elected as a Class Representative.",
+      "answer": "A first-year student who has not completed two semesters yet cannot be elected as a Class Representative.",
       "citations": [
         {
           "chunk_id": "509d7526a89f",
@@ -461,205 +437,465 @@
           "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 2: Council Composition"
         }
       ],
-      "reasoning": "The passage explicitly states the two\u2011semester eligibility applies to the other Council offices, and provides no restriction for Class Representatives, directly answering the question."
+      "reasoning": "Article 2.2 of the Constitution of the Institute Student Council and Affiliated Societies specifies that students must have completed at least two semesters to contest a Council office, which includes the position of Class Representative."
     },
     {
       "id": "U11",
       "bucket": "unanswerable",
       "question": "If the Council Treasurer (an appointed, not elected, position) resigns mid-year, who fills the vacancy and how?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196972, Requested 4464. Please try again in 10m20.352s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196972, Requested 4464. Please try again in 10m20.352s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The specific process for filling a vacancy in the Council Treasurer position mid-year is not covered in the provided passages. The passages discuss the general process for filling vacancies through by-elections but do not specify a unique process for appointed positions like the Council Treasurer.",
+      "citations": [
+        {
+          "chunk_id": "a08211e137e6",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 3: Term and Removal"
+        }
+      ],
+      "reasoning": "The passages provide general rules for filling vacancies through by-elections but do not specify a unique process for appointed positions like the Council Treasurer."
     },
     {
       "id": "U12",
       "bucket": "unanswerable",
       "question": "Is there a limit on how many different Societies a single student can hold an office-bearer position in at the same time?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196971, Requested 4251. Please try again in 8m47.904s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196971, Requested 4251. Please try again in 8m47.904s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "There is no specific limit stated in the retrieved passages regarding the number of Society office-bearer positions a single student can hold simultaneously.",
+      "citations": [
+        {
+          "chunk_id": "509d7526a89f",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 2: Council Composition"
+        },
+        {
+          "chunk_id": "a08211e137e6",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 3: Term and Removal"
+        },
+        {
+          "chunk_id": "70cdbd9bf59e",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 1: Name and Purpose"
+        },
+        {
+          "chunk_id": "9241983c2874",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies"
+        },
+        {
+          "chunk_id": "a6f45e3413b0",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 8: Amendments"
+        },
+        {
+          "chunk_id": "e6e84fd0a5c6",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 4: Recognition of Societies"
+        },
+        {
+          "chunk_id": "08b17acd129a",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 7: Inter-Society Disputes and Grievances"
+        }
+      ],
+      "reasoning": ""
     },
     {
       "id": "U13",
       "bucket": "unanswerable",
       "question": "If I take a Medical Leave of Absence for a semester, how is my CGPA-based scholarship eligibility calculated for the semester right after I return?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196970, Requested 4558. Please try again in 11m0.096s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196970, Requested 4558. Please try again in 11m0.096s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The specific calculation method for CGPA-based scholarship eligibility after returning from a Medical Leave of Absence is not directly addressed in the provided regulations. The rules cover general scholarship continuation requirements and medical leave policies but do not specify how scholarship eligibility is calculated for the semester immediately following a medical leave.",
+      "citations": [
+        {
+          "chunk_id": "802711830ef4",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 8: Scholarships and Financial Aid"
+        },
+        {
+          "chunk_id": "309155b895bb",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        }
+      ],
+      "reasoning": "The passages discuss general scholarship requirements and medical leave policies but do not provide specific guidance on how scholarship eligibility is calculated for the semester immediately following a medical leave."
     },
     {
       "id": "U14",
       "bucket": "unanswerable",
       "question": "Does the attendance policy have any different provisions for international students who may have visa-related travel obligations?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196968, Requested 4033. Please try again in 7m12.432s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196968, Requested 4033. Please try again in 7m12.432s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The attendance policy does not have any specific provisions for international students who may have visa-related travel obligations. The policy uniformly applies to all students without distinguishing between domestic and international students.",
+      "citations": [
+        {
+          "chunk_id": "7fa31d5deb0d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "d628f2d64786",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "4b7fb2c9120d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "7f84e49b1bf4",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "1561fd7b2504",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        }
+      ],
+      "reasoning": "The retrieved passages do not mention any special provisions for international students with visa-related travel obligations. The attendance policy applies uniformly to all students without differentiation."
     },
     {
       "id": "U15",
       "bucket": "unanswerable",
       "question": "Can a student on Academic Probation still hold a leadership position within a Society that isn't a Council office (e.g., a Society's internal head, not a Council Secretary)?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196967, Requested 4732. Please try again in 12m13.968s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196967, Requested 4732. Please try again in 12m13.968s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The retrieved passages do not specify whether a student on Academic Probation can hold a leadership position within a Society that is not a Council office. The passages cover eligibility for Council offices and general rules for Societies but do not address this specific scenario for Society leadership roles.",
+      "citations": [
+        {
+          "chunk_id": "509d7526a89f",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 2: Council Composition"
+        },
+        {
+          "chunk_id": "a6f45e3413b0",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 8: Amendments"
+        }
+      ],
+      "reasoning": "The passages provide information on eligibility for Council offices and general rules for Societies, but they do not specify the eligibility criteria for leadership positions within Societies that are not Council offices. There is no explicit mention of whether a student on Academic Probation can hold such positions."
     },
     {
       "id": "U16",
       "bucket": "unanswerable",
       "question": "Does the Institute provide extra time or accommodations during examinations for students with disabilities?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196966, Requested 4089. Please try again in 7m35.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196966, Requested 4089. Please try again in 7m35.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations do not explicitly state whether the Institute provides extra time or accommodations during examinations for students with disabilities. The passages retrieved do not address this specific scenario.",
+      "citations": [
+        {
+          "chunk_id": "2db4b4308c88",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 10: Examination Conduct"
+        },
+        {
+          "chunk_id": "5bd93d4671db",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 16: Internships and Placements"
+        },
+        {
+          "chunk_id": "0df2d590f007",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope > 5. Curfew and Night-Out Policy"
+        },
+        {
+          "chunk_id": "1c610bf397aa",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "a6f45e3413b0",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 8: Amendments"
+        },
+        {
+          "chunk_id": "e4df0dc08fd2",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope"
+        },
+        {
+          "chunk_id": "ddbfe13d9f01",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        },
+        {
+          "chunk_id": "5a75060fea3c",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        },
+        {
+          "chunk_id": "7f84e49b1bf4",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "1561fd7b2504",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        }
+      ],
+      "reasoning": ""
     },
     {
       "id": "U17",
       "bucket": "unanswerable",
       "question": "Can a student doing a credit-bearing final-semester internship under Section 16.1 also register for regular, non-internship courses in that same semester?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196965, Requested 4491. Please try again in 10m28.992s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196965, Requested 4491. Please try again in 10m28.992s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations do not specify whether a student doing a credit-bearing final-semester internship can also register for regular, non-internship courses in the same semester. Section 16.1 only mentions the conditions for undertaking a credit-bearing internship but does not address concurrent course registration.",
+      "citations": [
+        {
+          "chunk_id": "5bd93d469bca",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 16: Internship and Project Work"
+        }
+      ],
+      "reasoning": ""
     },
     {
       "id": "U18",
       "bucket": "unanswerable",
       "question": "If a Warden refuses to grant a student a Night-Out Pass, can the student appeal that specific refusal?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196963, Requested 4718. Please try again in 12m6.191999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "",
       "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196963, Requested 4718. Please try again in 12m6.191999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "reasoning": ""
     },
     {
       "id": "U19",
       "bucket": "unanswerable",
       "question": "Are hostel residents permitted to keep pets in their rooms?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196962, Requested 4340. Please try again in 9m22.464s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196962, Requested 4340. Please try again in 9m22.464s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The hostel policy does not explicitly address whether students are permitted to keep pets in their rooms. The handbook covers various aspects of student conduct and living conditions but does not mention pets specifically.",
+      "citations": [
+        {
+          "chunk_id": "e4df0dc08fd2",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope"
+        },
+        {
+          "chunk_id": "e9fbe82eaf40",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope > 4. Guest Policy"
+        },
+        {
+          "chunk_id": "b2ac1b7dc8f9",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope > 7. Electrical Appliances"
+        },
+        {
+          "chunk_id": "0df2d590f007",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope > 5. Curfew and Night-Out Policy"
+        }
+      ],
+      "reasoning": "None of the retrieved passages directly address the issue of keeping pets in hostel rooms."
     },
     {
       "id": "U20",
       "bucket": "unanswerable",
       "question": "What happens if a demand draft submitted for fee payment is dishonoured or bounces?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196961, Requested 4689. Please try again in 11m52.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "",
       "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196961, Requested 4689. Please try again in 11m52.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "reasoning": ""
     },
     {
       "id": "U21",
       "bucket": "unanswerable",
       "question": "If a scholarship recipient graduates early under Section 14.3, is any remaining scholarship amount paid out or forfeited?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196960, Requested 4691. Please try again in 11m53.232s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "",
       "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196960, Requested 4691. Please try again in 11m53.232s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "reasoning": ""
     },
     {
       "id": "U22",
       "bucket": "unanswerable",
       "question": "Does a national-level esports achievement qualify a student for a Sports Scholarship under Section 8.1?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196958, Requested 4780. Please try again in 12m30.816s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "",
       "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196958, Requested 4780. Please try again in 12m30.816s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "reasoning": ""
     },
     {
       "id": "U23",
       "bucket": "unanswerable",
       "question": "If I'm approved for the two-installment tuition payment plan and then miss the second installment, does the provisional cancellation process in Section 9.3 apply the same way as it would to a normal missed payment?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196957, Requested 4753. Please try again in 12m18.72s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196957, Requested 4753. Please try again in 12m18.72s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The specific scenario of the provisional cancellation process applying to a missed second installment of an approved two-installment tuition payment plan is not addressed in the provided passages. The passages cover general fee payment rules and the consequences of missed payments but do not specify how the provisional cancellation process applies to installment plans.",
+      "citations": [
+        {
+          "chunk_id": "c02b54469bca",
+          "source_file": "fee_deadlines.md",
+          "section": "Fee Schedule \u2014 Academic Year 2025\u201326 > Late Payment Policy"
+        },
+        {
+          "chunk_id": "9b794a9afd7d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 2: Academic Calendar and Registration"
+        },
+        {
+          "chunk_id": "5bd93d4671db",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 16: Internships and Placements"
+        },
+        {
+          "chunk_id": "4b7fb2c9120d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "1c610bf397aa",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "9a717e8eb90e",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 12: Committee Powers and Waivers"
+        },
+        {
+          "chunk_id": "21dd08400f0a",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 4: Internal Assessment and Grading"
+        },
+        {
+          "chunk_id": "91646c01c019",
+          "source_file": "fee_deadlines.md",
+          "section": "Fee Schedule \u2014 Academic Year 2025\u201326 > Late Payment Policy"
+        },
+        {
+          "chunk_id": "015cf6a3eb40",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 1: Scope and Applicability"
+        }
+      ],
+      "reasoning": "The passages provide general rules regarding fee payments, late payments, and the consequences of non-payment, but they do not specify how these rules apply to installment plans or the specific scenario of a missed second installment of an approved installment plan. Therefore, the exact application of the provisional cancellation process to this scenario is not covered."
     },
     {
       "id": "U24",
       "bucket": "unanswerable",
       "question": "Can a Society use part of its Student Activity Fund allocation to pay a stipend or honorarium to a guest speaker?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196956, Requested 4568. Please try again in 10m58.368s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196956, Requested 4568. Please try again in 10m58.368s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations and constitution documents do not specify whether a Society can use part of its Student Activity Fund allocation to pay a stipend or honorarium to a guest speaker. The rules cover various aspects of fund usage and event organization but do not address this specific scenario.",
+      "citations": [
+        {
+          "chunk_id": "80a058464a41",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 5: Student Activity Fund"
+        },
+        {
+          "chunk_id": "c9ee7ef67626",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 6: Events and External Sponsorship"
+        }
+      ],
+      "reasoning": "The passages retrieved do not contain a direct statement regarding the use of Student Activity Fund for paying a stipend or honorarium to a guest speaker."
     },
     {
       "id": "U25",
       "bucket": "unanswerable",
       "question": "If two Societies want to co-host a single event and split the funding request, how is the \u20b950,000 approval threshold in Article 5.3 applied -- per Society or per event?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196954, Requested 4586. Please try again in 11m5.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "",
       "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196954, Requested 4586. Please try again in 11m5.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "reasoning": ""
     },
     {
       "id": "U26",
       "bucket": "unanswerable",
       "question": "If a student qualifies for both a Merit Scholarship and a Sports Scholarship in the same semester, can they receive both at once?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196953, Requested 4466. Please try again in 10m13.007999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196953, Requested 4466. Please try again in 10m13.007999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations do not specify whether a student can receive both a Merit Scholarship and a Sports Scholarship in the same semester. The rules cover individual eligibility criteria for each scholarship type but do not address concurrent receipt of multiple scholarship categories.",
+      "citations": [
+        {
+          "chunk_id": "802711830ef4",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 8: Scholarships and Financial Aid"
+        }
+      ],
+      "reasoning": "The passages describe eligibility criteria for Merit Scholarships and Sports Scholarships separately but do not address the possibility of receiving both simultaneously."
     },
     {
       "id": "U27",
       "bucket": "unanswerable",
       "question": "If a hostel resident switches from the \"with mess\" plan to the \"without mess\" plan partway through a semester, is any portion of the mess fee refunded or adjusted?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196951, Requested 4869. Please try again in 13m6.24s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "",
       "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196951, Requested 4869. Please try again in 13m6.24s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "reasoning": ""
     },
     {
       "id": "U28",
       "bucket": "unanswerable",
       "question": "If two candidates receive the exact same number of votes in a Council election, how is the tie broken?",
       "expected_state": "NOT_FOUND",
-      "actual_state": "ERROR",
-      "correct": false,
-      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196950, Requested 4575. Please try again in 10m58.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "citations": [],
-      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196950, Requested 4575. Please try again in 10m58.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The Constitution of the Institute Student Council and Affiliated Societies does not specify a procedure for breaking ties in Council elections. The passages retrieved do not address how ties are resolved in elections.",
+      "citations": [
+        {
+          "chunk_id": "509d7526a89a",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 1: Name and Purpose"
+        },
+        {
+          "chunk_id": "509d7526a89b",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 4: Recognition of Societies"
+        },
+        {
+          "chunk_id": "509d7526a89c",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 5: Student Activity Fund"
+        },
+        {
+          "chunk_id": "509d7526a89d",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 6: Events and External Sponsorship"
+        },
+        {
+          "chunk_id": "509d7526a89e",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 7: Inter-Society Disputes and Grievances"
+        },
+        {
+          "chunk_id": "509d7526a89f",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 8: Amendments"
+        },
+        {
+          "chunk_id": "509d7526a8a0",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 9: Dissolution"
+        }
+      ],
+      "reasoning": ""
     }
   ]
 }
