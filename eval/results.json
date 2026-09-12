@@ -1,0 +1,665 @@
+{
+  "summary": {
+    "total": 41,
+    "correct": 20,
+    "by_bucket": {
+      "answerable": {
+        "correct": 13,
+        "total": 13
+      },
+      "contradiction": {
+        "correct": 2,
+        "total": 3
+      },
+      "unanswerable": {
+        "correct": 5,
+        "total": 25
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "A1",
+      "bucket": "answerable",
+      "question": "What is the minimum attendance percentage required to sit for the end-semester exam, according to Section 3?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "Section\u202f3 sets the minimum attendance at 75% of classes for a student to be eligible to sit for the End\u2011Semester Examination.",
+      "citations": [
+        {
+          "chunk_id": "7f84e49b1bf4",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        }
+      ],
+      "reasoning": "The passage explicitly states a 75% attendance floor for exam eligibility, directly answering the question."
+    },
+    {
+      "id": "A2",
+      "bucket": "answerable",
+      "question": "What is the minimum CGPA a student must maintain to avoid being placed on Academic Probation?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "A student must maintain a CGPA of at least\u202f5.0 to avoid being placed on Academic Probation.",
+      "citations": [
+        {
+          "chunk_id": "648424e1de6f",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 5: Minimum CGPA and Academic Probation"
+        },
+        {
+          "chunk_id": "7b01c9aa83ea",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Appendix A: Definitions"
+        }
+      ],
+      "reasoning": "Section\u202f5.1 and 5.2 explicitly state the 5.0 CGPA threshold for good standing and for avoiding probation, and no conflicting passages were found."
+    },
+    {
+      "id": "A3",
+      "bucket": "answerable",
+      "question": "Within how many working days of result declaration can a student request revaluation of an answer script?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "A student can request revaluation of an End\u2011Semester Examination answer script within seven working days of the result declaration.",
+      "citations": [
+        {
+          "chunk_id": "21dd08400f0a",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 4: Internal Assessment and Grading"
+        }
+      ],
+      "reasoning": "Section 4.4 explicitly states the revaluation request must be made within seven working days of result declaration, providing a direct answer."
+    },
+    {
+      "id": "A4",
+      "bucket": "answerable",
+      "question": "What is the tuition fee for a UG student in the Odd semester of 2025-26?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "The tuition fee for an undergraduate (UG) student in the Odd semester of the 2025\u201126 academic year is \u20b91,25,000 per semester.",
+      "citations": [
+        {
+          "chunk_id": "1a65b79b837d",
+          "source_file": "fee_deadlines.md",
+          "section": "Fee Schedule \u2014 Academic Year 2025\u201326 > Odd Semester (July\u2013December 2025)"
+        }
+      ],
+      "reasoning": "The fee schedule table for the Odd semester explicitly lists the tuition fee for all UG students as \u20b91,25,000, directly answering the question."
+    },
+    {
+      "id": "A5",
+      "bucket": "answerable",
+      "question": "Can a guest stay overnight in a student's hostel room?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "No. Overnight stays by guests are not permitted in student rooms under any circumstances; guests may only visit common areas during designated hours.",
+      "citations": [
+        {
+          "chunk_id": "e9fbe82eaf40",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope > 4. Guest Policy"
+        }
+      ],
+      "reasoning": "The Guest Policy explicitly states that overnight stays by guests are prohibited in student rooms, directly answering the question."
+    },
+    {
+      "id": "A6",
+      "bucket": "answerable",
+      "question": "How many founding members are required to register a new student Society?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "A new student Society must have at least fifteen founding members to be eligible for registration.",
+      "citations": [
+        {
+          "chunk_id": "e6e84fd0a5c6",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 4: Recognition of Societies"
+        }
+      ],
+      "reasoning": "Article 4.1 explicitly states the requirement of a list of at least fifteen founding members for a new Society seeking recognition."
+    },
+    {
+      "id": "A7",
+      "bucket": "answerable",
+      "question": "Can a student report ragging anonymously?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "Yes. A student may report ragging anonymously through the Institute's helpline, and any disclosed identity is protected as far as the law allows.",
+      "citations": [
+        {
+          "chunk_id": "399dc4e07579",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 17: Anti-Ragging and Student Conduct"
+        }
+      ],
+      "reasoning": "Section 17.3 explicitly states that ragging reports can be made anonymously, directly answering the question."
+    },
+    {
+      "id": "A8",
+      "bucket": "answerable",
+      "question": "What CGPA must a Merit Scholarship recipient maintain to continue receiving it?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "A Merit Scholarship recipient must maintain a cumulative GPA of at least\u202f8.0 to continue receiving the scholarship.",
+      "citations": [
+        {
+          "chunk_id": "802711830ef4",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 8: Scholarships and Financial Aid"
+        }
+      ],
+      "reasoning": "Section\u202f8.2 explicitly states the required CGPA for Merit Scholarship continuation, and no contradictory information is present."
+    },
+    {
+      "id": "A9",
+      "bucket": "answerable",
+      "question": "If a student arrives late to an exam, after how many minutes will they not be allowed to enter?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "A student who arrives more than 30 minutes after the start of an examination will not be permitted to enter the examination hall.",
+      "citations": [
+        {
+          "chunk_id": "2db4b4308c88",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 10: Examination Conduct"
+        }
+      ],
+      "reasoning": "The passage explicitly states the 30\u2011minute threshold for late entry, directly answering the question with no conflicting information."
+    },
+    {
+      "id": "A10",
+      "bucket": "answerable",
+      "question": "What is the maximum permitted duration of the B.Tech programme, including medical leave?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "The maximum permitted duration of the B.Tech programme, including any Medical Leave of Absence, is fourteen semesters.",
+      "citations": [
+        {
+          "chunk_id": "f62cbdd6b50d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 14: Degree Requirements and Duration"
+        }
+      ],
+      "reasoning": "The passage explicitly states the maximum permitted duration, including medical leave, is fourteen semesters, with no conflicting information."
+    },
+    {
+      "id": "A11",
+      "bucket": "answerable",
+      "question": "What happens to my exam eligibility if I miss classes because I had to attend my sister's wedding out of town?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "Missing classes for your sister's wedding is considered a personal/family function, which is not covered by the attendance\u2011condonation provisions. Therefore you must still achieve at least 75% attendance; if you fall below that you will be awarded an \u201cI\u201d (Ineligible) grade for the End\u2011Semester Examination and will not be allowed to sit the exam.",
+      "citations": [
+        {
+          "chunk_id": "1c610bf397aa",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "4b7fb2c9120d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        }
+      ],
+      "reasoning": "The passages explicitly state that family functions/personal travel are not eligible for attendance condonation (3.5) and that falling below 75% attendance results in an \"I\" grade (3.3), directly answering the question."
+    },
+    {
+      "id": "A12",
+      "bucket": "answerable",
+      "question": "Can I get my attendance shortfall condoned if I was traveling internationally for personal reasons during the semester?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "No. The regulations state there is no provision for condoning attendance shortfalls that arise from personal travel (or similar private commitments) unless they fall under the specific exceptions listed in Section\u202f3.4 or the Medical Exemption Clause. Personal international travel is therefore not eligible for attendance condonation.",
+      "citations": [
+        {
+          "chunk_id": "4b7fb2c9120d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "ddbfe13d9f01",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        }
+      ],
+      "reasoning": "The passages explicitly say personal travel is not covered for condonation, providing a direct answer to the question."
+    },
+    {
+      "id": "A13",
+      "bucket": "answerable",
+      "question": "Does attending my sibling's graduation ceremony count toward the Medical Exemption Clause?",
+      "expected_state": "ANSWERED",
+      "actual_state": "ANSWERED",
+      "correct": true,
+      "answer": "No. Attending a sibling's graduation is a family function and is not covered by the Medical Exemption Clause. Such events are treated under Section\u202f3.5 and do not qualify for attendance\u2011denominator adjustment.",
+      "citations": [
+        {
+          "chunk_id": "4b7fb2c9120d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "ddbfe13d9f01",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        }
+      ],
+      "reasoning": "The passages explicitly state that family functions and personal travel are not covered by the Medical Exemption Clause and are governed by Section\u202f3.5, which does not allow attendance adjustment."
+    },
+    {
+      "id": "C1",
+      "bucket": "contradiction",
+      "question": "What attendance percentage does a student need to maintain to continue receiving their scholarship?",
+      "expected_state": "CONTRADICTION",
+      "actual_state": "NOT_FOUND",
+      "correct": false,
+      "answer": "Internal error: the model's response could not be parsed as valid JSON. Treating as unanswered for safety.",
+      "citations": [],
+      "reasoning": "JSON parse error: Unterminated string starting at: line 6 column 6 (char 619). Raw output: {\n  \"state\": \"CONTRADICTION\",\n  \"answer\": \"One passage states that a student must maintain at least 75% attendance (Section\u202f3.2) to be eligible for examinations, which is the attendance floor referenced for scholarship standing. Another passage says the Scholarship Committee applies an attendance re"
+    },
+    {
+      "id": "C2",
+      "bucket": "contradiction",
+      "question": "How much is the late fee if I pay my tuition fee one week late?",
+      "expected_state": "CONTRADICTION",
+      "actual_state": "CONTRADICTION",
+      "correct": true,
+      "answer": "One source says the late fee is 2% of the total outstanding tuition fee for each week of delay (compounded weekly), while another source says the late fee is a flat charge of \u20b9500 per week (or part thereof). Both statements apply to a one\u2011week delay, but they conflict.",
+      "citations": [
+        {
+          "chunk_id": "91646c01c019",
+          "source_file": "fee_deadlines.md",
+          "section": "Fee Schedule \u2014 Academic Year 2025\u201326 > Late Payment Policy"
+        },
+        {
+          "chunk_id": "ffdf2c1521bd",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 9: Fee Payment"
+        }
+      ],
+      "reasoning": "Two passages address the same question (late fee for a week) but give different calculation methods, creating a direct contradiction."
+    },
+    {
+      "id": "C3",
+      "bucket": "contradiction",
+      "question": "What time is the hostel curfew?",
+      "expected_state": "CONTRADICTION",
+      "actual_state": "CONTRADICTION",
+      "correct": true,
+      "answer": "One passage says the hostel curfew is 10:00\u202fPM, while another passage says the standard hostel curfew is 11:00\u202fPM.",
+      "citations": [
+        {
+          "chunk_id": "0df2d590f007",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope > 5. Curfew and Night-Out Policy"
+        },
+        {
+          "chunk_id": "e4df0dc08fd2",
+          "source_file": "hostel_policy.pdf",
+          "section": "1. Scope"
+        }
+      ],
+      "reasoning": "Two passages address the same question (hostel curfew time) but give different times (10:00\u202fPM vs 11:00\u202fPM), creating a direct contradiction."
+    },
+    {
+      "id": "U4",
+      "bucket": "unanswerable",
+      "question": "If I represent my city (not the Institute) in a personal, non-Institute-affiliated hackathon, can that count as grounds for attendance condonation?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations only allow attendance condonation for Institute\u2011sanctioned activities (e.g., Institute sporting or cultural events, placement interviews, bereavement) as stated in Section\u202f3.4, and explicitly state there is no provision for personal travel, family functions, or private commitments not covered by Section\u202f3.4 (Section\u202f3.5). A personal, non\u2011Institute\u2011affiliated hackathon representing your city does not fall under any of these listed categories, so the passages do not address it as grounds for condonation.",
+      "citations": [
+        {
+          "chunk_id": "db4b1eebaf7b",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        },
+        {
+          "chunk_id": "4b7fb2c9120d",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 3: Attendance Requirement for Examination Eligibility"
+        }
+      ],
+      "reasoning": "No passage directly covers attendance condonation for a personal, non\u2011Institute hackathon; the relevant sections only list Institute\u2011sanctioned events and exclude private commitments."
+    },
+    {
+      "id": "U5",
+      "bucket": "unanswerable",
+      "question": "Does the Medical Exemption's attendance denominator adjustment (Section 7.2) still apply if the medical absence happens during the Summer Term?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations do not explicitly state whether the attendance denominator adjustment described in Section\u202f7.2 applies to a medical absence that occurs during the Summer Term. Section\u202f13.2 says Summer Term attendance follows Section\u202f3 in full, and Section\u202f7.2 describes the adjustment for a semester, but there is no direct provision linking the two for the Summer Term.",
+      "citations": [
+        {
+          "chunk_id": "be8fcc04d012",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 7: Medical Exemption and Leave of Absence"
+        },
+        {
+          "chunk_id": "f0b3fccc4058",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 13: Summer Term"
+        },
+        {
+          "chunk_id": "fad757c23ee9",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Appendix B: Cross-Reference Notes for Administrative Staff"
+        }
+      ],
+      "reasoning": "No passage directly addresses the applicability of the Section\u202f7.2 denominator adjustment to Summer Term situations; the relevant sections discuss each provision separately without linking them."
+    },
+    {
+      "id": "U6",
+      "bucket": "unanswerable",
+      "question": "If a Merit Scholarship recipient's CGPA drops because they took a Medical Leave of Absence semester, does the scholarship get paused rather than permanently lost?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ANSWERED",
+      "correct": false,
+      "answer": "No. According to the regulations, a Merit Scholarship recipient must keep a CGPA of at least 8.0. If the CGPA falls below 8.0 in any semester, the scholarship is lost for the next semester, though the student may reapply once the CGPA rises again. There is no provision that the scholarship is merely paused because the drop was due to a medical leave of absence.",
+      "citations": [
+        {
+          "chunk_id": "802711830ef4",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 8: Scholarships and Financial Aid"
+        },
+        {
+          "chunk_id": "12.3",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 12: Committee Powers and Waivers"
+        }
+      ],
+      "reasoning": "Section 8.2 explicitly states that a Merit Scholarship is lost if CGPA drops below 8.0, with no mention of a pause; thus the question is directly answered."
+    },
+    {
+      "id": "U7",
+      "bucket": "unanswerable",
+      "question": "Can a student challenge an Academic Integrity Committee's finding through the Grievance Redressal Committee (Section 11) instead of the procedural review in Section 6.5?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations give a specific procedural review process for Academic Integrity Committee decisions in Section\u202f6.5, and Section\u202f11 on Grievance Redressal only covers certain academic grievances such as grading disputes beyond Section\u202f4.4/4.5, harassment and discrimination. It does not provide a mechanism to challenge an Academic Integrity Committee finding through the Grievance Redressal Committee. Therefore, the scenario of using the GRC instead of the Section\u202f6.5 procedural review is not addressed in the provided passages.",
+      "citations": [
+        {
+          "chunk_id": "93821ee225e2",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 6: Academic Integrity"
+        },
+        {
+          "chunk_id": "e0de5e77f3df",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 11: Grievance Redressal"
+        }
+      ],
+      "reasoning": "No passage explicitly allows a student to use the Grievance Redressal Committee to challenge an Academic Integrity Committee finding; only Section\u202f6.5 provides a review route, so the question is not covered."
+    },
+    {
+      "id": "U8",
+      "bucket": "unanswerable",
+      "question": "If a student is expelled under Section 6.4 for a second academic integrity violation, can they ever reapply for admission in a future year?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "The regulations specify that a second proven instance of academic dishonesty results in expulsion (Section\u202f6.4) and that there is no appeal provision beyond a procedural review (Section\u202f6.5). However, none of the provided passages contain any rule or provision that addresses whether a expelled student may reapply for admission in a later year. Therefore, the specific question of re\u2011application after expulsion is not covered by the given regulations.",
+      "citations": [
+        {
+          "chunk_id": "93821ee225e2",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 6: Academic Integrity"
+        },
+        {
+          "chunk_id": "93821ee225e2",
+          "source_file": "regulations.md",
+          "section": "Institute of Applied Sciences and Technology > Section 6: Academic Integrity"
+        }
+      ],
+      "reasoning": "The passages describe expulsion and lack of appeal but do not mention any mechanism for future re\u2011application, so the scenario is not addressed."
+    },
+    {
+      "id": "U9",
+      "bucket": "unanswerable",
+      "question": "Does a Society event that runs past 9:00 PM on a Saturday need the same Dean approval as a weekday event under Article 6.4?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "NOT_FOUND",
+      "correct": true,
+      "answer": "Article 6.4 explicitly requires Dean of Student Affairs approval only for Society events that extend past 9:00\u202fPM on a weekday. The constitution does not contain any provision that extends this requirement to events on Saturdays, so the specific scenario of a Saturday event past 9:00\u202fPM is not addressed.",
+      "citations": [
+        {
+          "chunk_id": "c9ee7ef67626",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 6: Events and External Sponsorship"
+        }
+      ],
+      "reasoning": "The passage covers weekday events only and provides no rule for Saturday events; therefore the question is not answered by the given texts."
+    },
+    {
+      "id": "U10",
+      "bucket": "unanswerable",
+      "question": "Can a first-year student, who hasn't completed two semesters yet, be elected as a Class Representative?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ANSWERED",
+      "correct": false,
+      "answer": "Yes. The two\u2011semester completion rule applies only to the General, Cultural, Technical and Sports Secretary positions; the Constitution does not impose any semester\u2011completion requirement for Class Representatives, so a first\u2011year student can be elected as a Class Representative.",
+      "citations": [
+        {
+          "chunk_id": "509d7526a89f",
+          "source_file": "student_society_constitution.md",
+          "section": "Constitution of the Institute Student Council and Affiliated Societies > Article 2: Council Composition"
+        }
+      ],
+      "reasoning": "The passage explicitly states the two\u2011semester eligibility applies to the other Council offices, and provides no restriction for Class Representatives, directly answering the question."
+    },
+    {
+      "id": "U11",
+      "bucket": "unanswerable",
+      "question": "If the Council Treasurer (an appointed, not elected, position) resigns mid-year, who fills the vacancy and how?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196972, Requested 4464. Please try again in 10m20.352s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196972, Requested 4464. Please try again in 10m20.352s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U12",
+      "bucket": "unanswerable",
+      "question": "Is there a limit on how many different Societies a single student can hold an office-bearer position in at the same time?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196971, Requested 4251. Please try again in 8m47.904s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196971, Requested 4251. Please try again in 8m47.904s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U13",
+      "bucket": "unanswerable",
+      "question": "If I take a Medical Leave of Absence for a semester, how is my CGPA-based scholarship eligibility calculated for the semester right after I return?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196970, Requested 4558. Please try again in 11m0.096s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196970, Requested 4558. Please try again in 11m0.096s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U14",
+      "bucket": "unanswerable",
+      "question": "Does the attendance policy have any different provisions for international students who may have visa-related travel obligations?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196968, Requested 4033. Please try again in 7m12.432s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196968, Requested 4033. Please try again in 7m12.432s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U15",
+      "bucket": "unanswerable",
+      "question": "Can a student on Academic Probation still hold a leadership position within a Society that isn't a Council office (e.g., a Society's internal head, not a Council Secretary)?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196967, Requested 4732. Please try again in 12m13.968s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196967, Requested 4732. Please try again in 12m13.968s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U16",
+      "bucket": "unanswerable",
+      "question": "Does the Institute provide extra time or accommodations during examinations for students with disabilities?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196966, Requested 4089. Please try again in 7m35.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196966, Requested 4089. Please try again in 7m35.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U17",
+      "bucket": "unanswerable",
+      "question": "Can a student doing a credit-bearing final-semester internship under Section 16.1 also register for regular, non-internship courses in that same semester?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196965, Requested 4491. Please try again in 10m28.992s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196965, Requested 4491. Please try again in 10m28.992s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U18",
+      "bucket": "unanswerable",
+      "question": "If a Warden refuses to grant a student a Night-Out Pass, can the student appeal that specific refusal?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196963, Requested 4718. Please try again in 12m6.191999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196963, Requested 4718. Please try again in 12m6.191999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U19",
+      "bucket": "unanswerable",
+      "question": "Are hostel residents permitted to keep pets in their rooms?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196962, Requested 4340. Please try again in 9m22.464s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196962, Requested 4340. Please try again in 9m22.464s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U20",
+      "bucket": "unanswerable",
+      "question": "What happens if a demand draft submitted for fee payment is dishonoured or bounces?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196961, Requested 4689. Please try again in 11m52.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196961, Requested 4689. Please try again in 11m52.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U21",
+      "bucket": "unanswerable",
+      "question": "If a scholarship recipient graduates early under Section 14.3, is any remaining scholarship amount paid out or forfeited?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196960, Requested 4691. Please try again in 11m53.232s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196960, Requested 4691. Please try again in 11m53.232s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U22",
+      "bucket": "unanswerable",
+      "question": "Does a national-level esports achievement qualify a student for a Sports Scholarship under Section 8.1?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196958, Requested 4780. Please try again in 12m30.816s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196958, Requested 4780. Please try again in 12m30.816s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U23",
+      "bucket": "unanswerable",
+      "question": "If I'm approved for the two-installment tuition payment plan and then miss the second installment, does the provisional cancellation process in Section 9.3 apply the same way as it would to a normal missed payment?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196957, Requested 4753. Please try again in 12m18.72s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196957, Requested 4753. Please try again in 12m18.72s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U24",
+      "bucket": "unanswerable",
+      "question": "Can a Society use part of its Student Activity Fund allocation to pay a stipend or honorarium to a guest speaker?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196956, Requested 4568. Please try again in 10m58.368s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196956, Requested 4568. Please try again in 10m58.368s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U25",
+      "bucket": "unanswerable",
+      "question": "If two Societies want to co-host a single event and split the funding request, how is the \u20b950,000 approval threshold in Article 5.3 applied -- per Society or per event?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196954, Requested 4586. Please try again in 11m5.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196954, Requested 4586. Please try again in 11m5.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U26",
+      "bucket": "unanswerable",
+      "question": "If a student qualifies for both a Merit Scholarship and a Sports Scholarship in the same semester, can they receive both at once?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196953, Requested 4466. Please try again in 10m13.007999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196953, Requested 4466. Please try again in 10m13.007999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U27",
+      "bucket": "unanswerable",
+      "question": "If a hostel resident switches from the \"with mess\" plan to the \"without mess\" plan partway through a semester, is any portion of the mess fee refunded or adjusted?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196951, Requested 4869. Please try again in 13m6.24s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196951, Requested 4869. Please try again in 13m6.24s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "id": "U28",
+      "bucket": "unanswerable",
+      "question": "If two candidates receive the exact same number of votes in a Council election, how is the tie broken?",
+      "expected_state": "NOT_FOUND",
+      "actual_state": "ERROR",
+      "correct": false,
+      "answer": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196950, Requested 4575. Please try again in 10m58.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "citations": [],
+      "reasoning": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kv6f03mzfed9b4y81nrzfwcc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196950, Requested 4575. Please try again in 10m58.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "answerable": [
+    {
+      "id": "A1",
+      "question": "What is the minimum attendance percentage required to sit for the end-semester exam, according to Section 3?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "75%"
+    },
+    {
+      "id": "A2",
+      "question": "What is the minimum CGPA a student must maintain to avoid being placed on Academic Probation?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "5.0"
+    },
+    {
+      "id": "A3",
+      "question": "Within how many working days of result declaration can a student request revaluation of an answer script?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "7 working days"
+    },
+    {
+      "id": "A4",
+      "question": "What is the tuition fee for a UG student in the Odd semester of 2025-26?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "\u20b91,25,000"
+    },
+    {
+      "id": "A5",
+      "question": "Can a guest stay overnight in a student's hostel room?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "No, not permitted under any circumstances"
+    },
+    {
+      "id": "A6",
+      "question": "How many founding members are required to register a new student Society?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "At least 15"
+    },
+    {
+      "id": "A7",
+      "question": "Can a student report ragging anonymously?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "Yes, via the Institute helpline"
+    },
+    {
+      "id": "A8",
+      "question": "What CGPA must a Merit Scholarship recipient maintain to continue receiving it?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "8.0 (per Section 8.2, distinct from the contradictory 12.3 reference)"
+    },
+    {
+      "id": "A9",
+      "question": "If a student arrives late to an exam, after how many minutes will they not be allowed to enter?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "30 minutes"
+    },
+    {
+      "id": "A10",
+      "question": "What is the maximum permitted duration of the B.Tech programme, including medical leave?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "14 semesters"
+    },
+    {
+      "id": "A11",
+      "question": "What happens to my exam eligibility if I miss classes because I had to attend my sister's wedding out of town?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "Section 3.5 explicitly excludes family functions from condonation, so the normal 75% threshold applies with no exception -- this was originally mis-labeled NOT_FOUND, corrected after eval run revealed the corpus names this exact scenario."
+    },
+    {
+      "id": "A12",
+      "question": "Can I get my attendance shortfall condoned if I was traveling internationally for personal reasons during the semester?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "Section 3.5 explicitly excludes personal travel from condonation -- no exception, regardless of domestic/international."
+    },
+    {
+      "id": "A13",
+      "question": "Does attending my sibling's graduation ceremony count toward the Medical Exemption Clause?",
+      "expected_state": "ANSWERED",
+      "expected_gist": "No -- Section 7 is explicitly medical-only, and Section 3.5 excludes family functions generally."
+    }
+  ],
+  "contradiction": [
+    {
+      "id": "C1",
+      "question": "What attendance percentage does a student need to maintain to continue receiving their scholarship?",
+      "expected_state": "CONTRADICTION",
+      "expected_gist": "Section 3.2 says 75%, Section 12.3 says 80% while claiming to quote Section 3"
+    },
+    {
+      "id": "C2",
+      "question": "How much is the late fee if I pay my tuition fee one week late?",
+      "expected_state": "CONTRADICTION",
+      "expected_gist": "Regulations Section 9.2 says flat \u20b9500/week; fee_deadlines.md says 2% of outstanding amount/week"
+    },
+    {
+      "id": "C3",
+      "question": "What time is the hostel curfew?",
+      "expected_state": "CONTRADICTION",
+      "expected_gist": "Hostel handbook scope section says 11:00 PM; Section 5.1 says 10:00 PM"
+    }
+  ],
+  "unanswerable": [
+    {
+      "id": "U4",
+      "question": "If I represent my city (not the Institute) in a personal, non-Institute-affiliated hackathon, can that count as grounds for attendance condonation?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 3.4 condonation requires the activity to be 'Institute-sanctioned'; a personal hackathon's status is never addressed."
+    },
+    {
+      "id": "U5",
+      "question": "Does the Medical Exemption's attendance denominator adjustment (Section 7.2) still apply if the medical absence happens during the Summer Term?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 13.2 says Summer Term attendance follows Section 3 in full, but never states whether the Section 7 medical adjustment mechanism itself is available in a Summer Term context."
+    },
+    {
+      "id": "U6",
+      "question": "If a Merit Scholarship recipient's CGPA drops because they took a Medical Leave of Absence semester, does the scholarship get paused rather than permanently lost?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 8.2 states the CGPA-below-8.0 consequence in general, and Section 7.3 describes Medical Leave separately, but their interaction is never addressed."
+    },
+    {
+      "id": "U7",
+      "question": "Can a student challenge an Academic Integrity Committee's finding through the Grievance Redressal Committee (Section 11) instead of the procedural review in Section 6.5?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 11.1 lists what the GRC handles and Section 11.4 excludes sexual harassment specifically, but never states whether Academic Integrity Committee findings can also go to the GRC."
+    },
+    {
+      "id": "U8",
+      "question": "If a student is expelled under Section 6.4 for a second academic integrity violation, can they ever reapply for admission in a future year?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "The corpus describes the expulsion but has no readmission policy anywhere."
+    },
+    {
+      "id": "U9",
+      "question": "Does a Society event that runs past 9:00 PM on a Saturday need the same Dean approval as a weekday event under Article 6.4?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Article 6.4 specifies 'weekday' explicitly; weekend late events are never addressed."
+    },
+    {
+      "id": "U10",
+      "question": "Can a first-year student, who hasn't completed two semesters yet, be elected as a Class Representative?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Article 2.2's two-semester eligibility rule is stated for Council-wide offices; Article 2.4 (Class Representatives) doesn't restate or exclude that rule, leaving first-year CR eligibility unaddressed."
+    },
+    {
+      "id": "U11",
+      "question": "If the Council Treasurer (an appointed, not elected, position) resigns mid-year, who fills the vacancy and how?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Article 3.3's vacancy-filling process is written for elected office-bearers; the Treasurer is explicitly appointed, and no vacancy process for appointed roles is given."
+    },
+    {
+      "id": "U12",
+      "question": "Is there a limit on how many different Societies a single student can hold an office-bearer position in at the same time?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Never addressed anywhere in the Constitution."
+    },
+    {
+      "id": "U13",
+      "question": "If I take a Medical Leave of Absence for a semester, how is my CGPA-based scholarship eligibility calculated for the semester right after I return?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 7.3 says no grades are recorded and the semester doesn't count toward programme duration, but never states how scholarship CGPA continuity is handled across that gap."
+    },
+    {
+      "id": "U14",
+      "question": "Does the attendance policy have any different provisions for international students who may have visa-related travel obligations?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "International students and visa considerations are never mentioned anywhere in the corpus."
+    },
+    {
+      "id": "U15",
+      "question": "Can a student on Academic Probation still hold a leadership position within a Society that isn't a Council office (e.g., a Society's internal head, not a Council Secretary)?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Article 2.3 restricts probation-affected students only from contesting Council offices; internal Society leadership roles are a separate thing never addressed."
+    },
+    {
+      "id": "U16",
+      "question": "Does the Institute provide extra time or accommodations during examinations for students with disabilities?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Accessibility is mentioned only for hostel room allotment (Section 2.1 of the hostel handbook); examination accommodations are never addressed."
+    },
+    {
+      "id": "U17",
+      "question": "Can a student doing a credit-bearing final-semester internship under Section 16.1 also register for regular, non-internship courses in that same semester?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 16 describes the internship track but never addresses whether it can be combined with regular course registration."
+    },
+    {
+      "id": "U18",
+      "question": "If a Warden refuses to grant a student a Night-Out Pass, can the student appeal that specific refusal?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 8.4 of the hostel handbook only covers appeals against Hostel Disciplinary Committee decisions; a Warden's refusal to issue a pass is a different, unaddressed situation."
+    },
+    {
+      "id": "U19",
+      "question": "Are hostel residents permitted to keep pets in their rooms?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Never mentioned anywhere in the hostel handbook."
+    },
+    {
+      "id": "U20",
+      "question": "What happens if a demand draft submitted for fee payment is dishonoured or bounces?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "The Fee Schedule describes how to submit a DD but never addresses a bounced or dishonoured DD."
+    },
+    {
+      "id": "U21",
+      "question": "If a scholarship recipient graduates early under Section 14.3, is any remaining scholarship amount paid out or forfeited?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 14.3 covers early graduation eligibility but says nothing about scholarship fund treatment in that scenario."
+    },
+    {
+      "id": "U22",
+      "question": "Does a national-level esports achievement qualify a student for a Sports Scholarship under Section 8.1?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 8.1 refers to 'state or national-level sporting achievement' without defining whether esports counts as a sport for this purpose."
+    },
+    {
+      "id": "U23",
+      "question": "If I'm approved for the two-installment tuition payment plan and then miss the second installment, does the provisional cancellation process in Section 9.3 apply the same way as it would to a normal missed payment?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "The installment plan note in fee_deadlines.md says late fees apply independently to each missed installment, but never states whether Section 9.3's provisional cancellation and its four-week timeline apply the same way to a missed installment as to a normal missed due date."
+    },
+    {
+      "id": "U24",
+      "question": "Can a Society use part of its Student Activity Fund allocation to pay a stipend or honorarium to a guest speaker?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Article 5 and 6 describe fund allocation and receipts generally but never address paying individuals (as opposed to venue/logistics costs)."
+    },
+    {
+      "id": "U25",
+      "question": "If two Societies want to co-host a single event and split the funding request, how is the \u20b950,000 approval threshold in Article 5.3 applied -- per Society or per event?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Article 5.3 states the threshold but the Constitution never addresses joint/co-hosted events or how the threshold applies when funding is split between two Societies."
+    },
+    {
+      "id": "U26",
+      "question": "If a student qualifies for both a Merit Scholarship and a Sports Scholarship in the same semester, can they receive both at once?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Section 8 defines eligibility criteria for each scholarship category independently but never states whether a student can hold more than one category simultaneously."
+    },
+    {
+      "id": "U27",
+      "question": "If a hostel resident switches from the \"with mess\" plan to the \"without mess\" plan partway through a semester, is any portion of the mess fee refunded or adjusted?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "The Fee Schedule lists amounts for each plan and the hostel handbook allows mess opt-out with Warden approval, but neither addresses a mid-semester switch or any resulting fee adjustment."
+    },
+    {
+      "id": "U28",
+      "question": "If two candidates receive the exact same number of votes in a Council election, how is the tie broken?",
+      "expected_state": "NOT_FOUND",
+      "why_unanswerable": "Article 2 describes the election process and eligibility but never addresses a tied outcome."
+    }
+  ]
+}
