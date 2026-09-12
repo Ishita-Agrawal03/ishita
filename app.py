@@ -11,9 +11,13 @@ import os
 import sys
 import json
 import streamlit as st
+import sys
+from pathlib import Path
 
-sys.path.insert(0, os.path.dirname(__file__))
-from answer import answer_question  # noqa: E402
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT / "src"))
+
+from answer import answer_question
 
 st.set_page_config(page_title="Rulebook Oracle", page_icon="📘", layout="centered")
 
