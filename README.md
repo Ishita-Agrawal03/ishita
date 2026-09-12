@@ -1,210 +1,664 @@
+
+
+````markdown
 # RuleLens — The Rulebook That Argues With Itself
 
-A RAG system over a university's academic regulations that answers student questions
-**only from the actual documents**, and is honest about the three states any question
-can land in:
+A retrieval-augmented QA system over a university rulebook that does **more than generate an answer**.
 
-- ✅ **ANSWERED** — the rulebook covers this, here's the passage.
-- 🚫 **NOT_FOUND** — the rulebook is silent on this specific scenario.
-- ⚠️ **CONTRADICTION** — two passages in the rulebook disagree with each other.
+For every question, RuleLens decides whether the corpus:
 
-Every claim is traceable to an exact `chunk_id / source_file / section`, checkable
-without asking the system anything further.
+- ✅ **ANSWERED** — contains a direct answer
+- 🚫 **NOT_FOUND** — does not explicitly cover the requested scenario
+- ⚠️ **CONTRADICTION** — contains conflicting rules for the same question
 
-## Why this exists
+Every answer is grounded in retrieved passages and includes traceable
+`chunk_id / source_file / section` citations.
 
-Real regulatory documents get amended piecemeal for years and accumulate genuine
-internal contradictions nobody notices because nobody reads the whole thing at once.
-This project plants three such contradictions in a synthetic-but-realistic university
-rulebook, and builds a system that surfaces them instead of confidently picking a
-side — while also correctly refusing to answer plausible-sounding questions the
-rulebook simply doesn't address.
+---
+
+## Why RuleLens?
+
+Real regulatory documents are often amended over time. Different sections can
+contain conflicting values or rules, while other seemingly plausible scenarios
+may simply not be covered.
+
+A normal RAG system can be tempted to:
+
+> retrieve something vaguely related → generate a confident answer
+
+RuleLens instead asks:
+
+> **Does the retrieved corpus actually support an answer?**
+
+The project deliberately contains three planted contradictions and 25 hard
+unanswerable questions to test whether the system can distinguish:
+
+**knowledge from the corpus** vs. **reasonable-sounding inference** vs.
+**internal conflict**.
+
+The goal is not to maximize the number of questions answered. The goal is to
+find the line between **too little ignorance and too much caution**.
+
+---
 
 ## Architecture
 
+```text
+                         ┌─────────────────────┐
+                         │   Rulebook Corpus   │
+                         │ Markdown + PDF      │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │     ingest.py       │
+                         │ chunk + embed       │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │       Chroma        │
+                         │ persistent, local   │
+                         │    vector store     │
+                         └──────────┬──────────┘
+                                    │
+                              retrieve top-k
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │      answer.py      │
+                         │ retrieval sanity    │
+                         │       check         │
+                         │         +           │
+                         │  Qwen2.5 14B local  │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                 ┌──────────────────────────────────┐
+                 │       Three-state decision        │
+                 │                                  │
+                 │ ANSWERED / NOT_FOUND /           │
+                 │ CONTRADICTION                    │
+                 └───────────────┬──────────────────┘
+                                 │
+                                 ▼
+                         citations + answer
+                                 │
+                                 ▼
+                         ┌─────────────────────┐
+                         │    Streamlit UI     │
+                         └─────────────────────┘
+````
+
+### Core components
+
+* **Chunking** (`src/ingest.py`)
+  Splits the corpus by document headings and numbered sub-clauses so that
+  retrieved chunks correspond to coherent rules rather than arbitrary
+  character windows.
+
+* **Embeddings**
+  `sentence-transformers/all-MiniLM-L6-v2` runs locally.
+
+* **Vector store**
+  Chroma is persisted to `data/vectorstore/`.
+
+* **LLM**
+  `qwen2.5:14b-instruct` runs locally through Ollama.
+
+* **Retrieval sanity check**
+  If the best retrieval distance is above
+  `RETRIEVAL_DISTANCE_CEILING = 1.75`, RuleLens returns `NOT_FOUND` without
+  calling the LLM.
+
+* **Three-state classification**
+  The LLM receives the retrieved passages and follows an explicit decision
+  procedure:
+
+  1. Identify passages that directly answer the question.
+  2. If one consistent direct answer exists → `ANSWERED`.
+  3. If multiple direct passages give different values/rules for the same
+     quantity → `CONTRADICTION`.
+  4. If no retrieved passage directly answers the question → `NOT_FOUND`.
+  5. The system avoids silently extending a rule from one section to another
+     when the corpus does not explicitly establish that connection.
+
+---
+
+## Repository Structure
+
+```text
+ishita/
+│
+├── app.py                         Streamlit demo UI
+├── README.md
+├── requirements.txt
+├── contradictions.md              Answer key for the 3 planted contradictions
+│
+├── corpus/
+│   ├── regulations.md             Main academic regulations
+│   ├── fee_deadlines.md           Fee/deadline table
+│   ├── student_society_constitution.md
+│   └── hostel_policy.pdf          PDF rulebook document
+│
+├── src/
+│   ├── ingest.py                  Chunk, embed, and store corpus
+│   ├── retrieve.py                Query Chroma vector store
+│   └── answer.py                  Three-state classification + Ollama call
+│
+├── eval/
+│   ├── questions.json             Evaluation questions
+│   ├── run_eval.py                Automated evaluation script
+│   ├── results.json               Raw evaluation results
+│   └── results.md                 Human-readable evaluation report
+│
+├── data/
+│   └── vectorstore/               Persistent Chroma database
+│
+└── build/
+    └── ...                        Supporting build/generated artifacts
 ```
-question
-   │
-   ▼
-retrieve.py  ──►  Chroma (persistent, local) ──► top-12 chunks (with source_file + section metadata)
-   │
-   ▼
-answer.py
-   ├─ if best match is nowhere near the question → NOT_FOUND immediately (no LLM call)
-   └─ else → local LLM via Ollama (qwen2.5:14b-instruct), following a 3-step decision
-             procedure, returns strict JSON with state + citations
-```
 
-- **Chunking** (`src/ingest.py`): splits by heading (markdown `#`/`##`, or plain
-  numbered headings like `5. Curfew Policy` for PDF-extracted text, since heading
-  markup doesn't survive PDF text extraction) so a chunk is a coherent clause, not
-  an arbitrary character slice. Long sections are further split on numbered
-  sub-clauses (`3.1`, `3.2`, ...). This is what makes citations precise.
-- **Embeddings**: `sentence-transformers/all-MiniLM-L6-v2`, downloaded once from
-  Hugging Face, runs locally, no API cost.
-- **Vector store**: Chroma, persisted to `data/vectorstore/` so ingest only needs to
-  run once (re-run any time the corpus changes — it's idempotent).
-- **LLM**: `qwen2.5:14b-instruct`, served locally via [Ollama](https://ollama.com),
-  called with `temperature=0` and `format="json"` for strict JSON output.
-  No API key, no external calls, no per-token cost. (Chosen after two earlier
-  model choices — a hosted API model that hit rate limits mid-eval, and a smaller
-  4B local model that wasn't reliable enough on this task's nuance — see
-  **Model selection history** below.)
-- **Retrieval sanity check**: before the LLM is even called, if the best (lowest)
-  retrieval distance exceeds `RETRIEVAL_DISTANCE_CEILING = 1.75`, the system returns
-  `NOT_FOUND` immediately, with no LLM call. This only screens out questions with
-  essentially zero topical relevance to the corpus (e.g. "what's the capital of
-  France"). See `src/answer.py`'s module docstring for why this is the one
-  deliberately-tuned numeric config value in the system, and why almost all of the
-  real ANSWERED-vs-NOT_FOUND-vs-CONTRADICTION judgment is pushed onto the LLM via
-  prompt design rather than a numeric threshold.
-
-## Repo structure
-
-```
-corpus/                          the rulebook itself (this is what gets ingested)
-├── regulations.md                main academic regulations, ~2.6k words   (contradiction #1 lives here)
-├── fee_deadlines.md               fee table, required "table" format       (contradiction #2 lives here)
-├── student_society_constitution.md  extra markdown document
-└── hostel_policy.pdf              required PDF format                     (contradiction #3, self-contained)
-
-contradictions.md                 answer key: exact location of all 3 planted contradictions
-                                   (deliberately NOT in corpus/, so it isn't ingested — that would be cheating)
-
-src/
-├── ingest.py                     chunk corpus, embed, store in Chroma
-├── retrieve.py                   query the vector store
-├── answer.py                     the three-state classification logic + Ollama call
-└── app.py                        Streamlit demo UI
-
-eval/
-├── questions.json                 13 answerable + 3 contradiction + 25 hard unanswerable
-├── run_eval.py                    scores automatically, no prose-squinting required
-├── results.json                   generated by run_eval.py — the raw scored output
-└── results.md                     generated by run_eval.py — human-readable version
-```
+---
 
 ## Installation
 
+### 1. Clone the repository
+
 ```bash
-git clone <your-repo-url>
-cd rulebook-oracle
+git clone https://github.com/Ishita-Agrawal03/ishita.git
+cd ishita
+```
 
+### 2. Create a virtual environment
+
+#### Windows
+
+```bash
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+.venv\Scripts\activate
+```
 
+#### Linux / macOS
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install Python dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-# Install Ollama (if not already): https://ollama.com/download
+### 4. Install Ollama
+
+Install Ollama from:
+
+[https://ollama.com/download](https://ollama.com/download)
+
+Then pull the model:
+
+```bash
 ollama pull qwen2.5:14b-instruct
 ```
 
-No API keys required anywhere in this project — embeddings and the LLM both run
-locally.
+No API key is required.
 
-## Running the app
+The embeddings and LLM both run locally.
+
+---
+
+## Running RuleLens
+
+### 1. Start Ollama
+
+If Ollama is not already running as a background service:
 
 ```bash
-ollama serve                     # if not already running as a background service
-python src/ingest.py             # one-time: builds the vector store (~30 sec)
-
-streamlit run src/app.py
+ollama serve
 ```
 
-The UI shows the answer, a colored state badge (ANSWERED / NOT_FOUND /
-CONTRADICTION), expandable citations with exact chunk/section references, and — in
-the sidebar — the current score from the last evaluation run, for demo purposes.
+### 2. Build the vector store
 
-Sanity-check the pipeline from the command line first, if you prefer:
+If the persistent vector store is missing or the corpus has changed:
+
+```bash
+python src/ingest.py
+```
+
+The ingestion process:
+
+```text
+corpus documents
+      ↓
+document-aware chunking
+      ↓
+MiniLM embeddings
+      ↓
+Chroma persistent vector store
+```
+
+### 3. Start the Streamlit application
+
+From the repository root:
+
+```bash
+streamlit run app.py
+```
+
+The UI provides:
+
+* question input
+* generated answer
+* `ANSWERED` / `NOT_FOUND` / `CONTRADICTION` state
+* supporting citations
+* source file and section information
+* evaluation score from the latest evaluation run
+
+---
+
+## Command-Line Test
+
+The answer pipeline can also be tested without Streamlit.
+
+From the repository root:
+
 ```bash
 python src/answer.py "What is the minimum attendance required for exams?"
 ```
 
-## Running the evaluation
+This runs the same retrieval and local LLM pipeline used by the application.
+
+---
+
+## Evaluation
+
+The evaluation set contains:
+
+* **13 answerable questions**
+* **3 contradiction questions**
+* **25 hard unanswerable questions**
+
+The 25 unanswerable questions are intentionally designed to be plausible
+questions that the corpus genuinely does not answer.
+
+Run the complete evaluation:
 
 ```bash
-python eval/run_eval.py                          # full 41-question run
-python eval/run_eval.py --bucket contradiction    # just the contradiction bucket
-python eval/run_eval.py --skip answerable         # everything except answerable (useful once that bucket is stable)
-python eval/run_eval.py --sleep 1.0               # slow down between calls if needed
+python eval/run_eval.py
 ```
 
-Prints PASS/FAIL per question, a confusion matrix, and writes `eval/results.json` +
-`eval/results.md` automatically — nothing here requires reading prose to score.
+Run only the contradiction tests:
 
-## Honest numbers (most recent run)
+```bash
+python eval/run_eval.py --bucket contradiction
+```
 
-**35 / 41 correct.**
+Run only the 25 hard unanswerable questions:
 
-| Bucket | Score |
-|---|---|
-| Answerable | 9/13 |
-| Contradiction | 3/3 |
-| Unanswerable (the 25 hard ones) | 23/25 |
+```bash
+python eval/run_eval.py --bucket unanswerable
+```
 
-Full detail, per-question citations, and reasoning: `eval/results.md`.
+Skip a bucket:
 
-The remaining 6 failures split into two shapes:
-- **4 ANSWERED questions returning NOT_FOUND** (A2, A4, A7, A8) — the model is
-  occasionally being too conservative on questions with a single, clearly-stated
-  answer. Not yet root-caused to a specific retrieval or prompt issue at time of
-  writing (the failures are recent, following prompt work focused on fixing the
-  contradiction-detection failures below).
-- **2 NOT_FOUND questions returning ANSWERED** (U5, U10) — the model occasionally
-  still extends a rule across a section boundary the corpus doesn't explicitly
-  bridge (the exact failure pattern the Step 3 anti-inference rule in the prompt is
-  meant to catch, but doesn't catch 100% of the time).
+```bash
+python eval/run_eval.py --skip answerable
+```
 
-The contradiction bucket (3/3) required the most iteration: earlier runs saw the
-model pick one value and answer confidently instead of flagging the conflict,
-particularly when one passage read as more "operative" or "authoritative" than the
-other. The fix that worked was adding explicit worked examples of exactly that
-failure pattern to the prompt (see `src/answer.py`'s `SYSTEM_PROMPT`, Step 2(b)),
-rather than only stating the rule abstractly — this model responds much more
-reliably to a concrete example of the mistake than to a general instruction not to
-make it.
+Add a delay between questions:
 
-## Model selection history
+```bash
+python eval/run_eval.py --sleep 1.0
+```
 
-Worth documenting since it materially affected results:
+The evaluator automatically:
 
-1. **`llama-3.3-70b-versatile` via Groq** — worked well but rate-limited during
-   evaluation runs on the free tier, and one run failed a question purely on
-   malformed JSON (an unescaped quote broke the parser, not a reasoning failure).
-2. **`qwen3:4b` via Ollama (local)** — free and unlimited, but noticeably too weak
-   for this task's nuance: it failed easy ANSWERED questions the bigger models never
-   failed, *and* over-extended on NOT_FOUND questions in the same run — noisy in
-   both directions simultaneously, which is a capability ceiling, not something
-   prompt tuning fixes.
-3. **`qwen2.5:14b-instruct` via Ollama (local)** — the model used for the numbers
-   above. No thinking-mode tag issues (unlike qwen3), reliable JSON formatting, and
-   materially more stable than the 4B model. This is the recommended free/local
-   choice for this task.
+* runs every question through the real answer pipeline
+* compares the predicted state with `expected_state`
+* prints PASS/FAIL for every question
+* generates a confusion matrix
+* writes `eval/results.json`
+* writes `eval/results.md`
 
-## What is mocked / simulated
+The score is based on **state classification**, not subjective judgement of
+whether generated prose "sounds right".
 
-Nothing in the core pipeline is mocked — retrieval, embeddings, and the LLM call are
-all real and running end-to-end against the actual corpus for every question. The
-one thing worth flagging as not fully implemented: an earlier design considered a
-**deterministic pre-check** (regex-based value extraction to catch numeric
-contradictions before the LLM sees the question at all) as a fallback if prompt-only
-fixes couldn't get the contradiction bucket reliable. It wasn't needed in the end —
-prompt iteration alone got the contradiction bucket to 3/3 — so it was not built.
-If you extend this project, that's the natural next lever for further reliability
-on contradiction detection.
+---
 
-## Known limitations
+## Evaluation Results
 
-- Retrieval is embedding-based (MiniLM), not fine-tuned on legal/regulatory text —
-  a stronger embedding model would likely improve borderline retrieval, at the cost
-  of setup complexity.
-- The three-state classification depends on the LLM correctly reasoning about
-  "adjacent but not covered" vs. "directly stated," which is inherently a judgment
-  call; the 6/41 remaining failures above are exactly this boundary being crossed
-  in both directions on a minority of questions.
-- Single-turn only — no conversation memory across questions in the CLI/eval; the
-  Streamlit UI keeps a visible history but each answer is still generated fresh
-  from the current question alone.
-- Local-model dependent: results will vary somewhat by machine (Ollama version,
-  qwen2.5 build) and are not guaranteed bit-identical to the numbers above, though
-  they should be in the same range given `temperature=0`.
+Most recent evaluation:
+
+**35 / 41 correct — 85.4%**
+
+| Bucket        |       Score |
+| ------------- | ----------: |
+| Answerable    |  **9 / 13** |
+| Contradiction |   **3 / 3** |
+| Unanswerable  | **23 / 25** |
+| **Overall**   | **35 / 41** |
+
+### What this means
+
+The contradiction detector achieved:
+
+**3 / 3**
+
+This is important because a naive RAG system may retrieve two conflicting
+passages and still confidently choose one.
+
+The system also correctly rejected:
+
+**23 / 25**
+
+of the deliberately hard unanswerable questions.
+
+The remaining failures are not hidden:
+
+* **4 ANSWERED questions → NOT_FOUND**
+
+  * A2, A4, A7, A8
+  * The model was too conservative despite a direct answer being available.
+
+* **2 NOT_FOUND questions → ANSWERED**
+
+  * U5, U10
+  * The model inferred a rule across a section boundary that the corpus did
+    not explicitly establish.
+
+These errors represent the central trade-off of the project: **when should a
+system answer, and when should it admit that the corpus does not support the
+answer?**
+
+Full per-question results, answers, reasoning, and citations are available in:
+
+```text
+eval/results.md
+```
+
+---
+
+## Example States
+
+### 1. ANSWERED
+
+**Question:**
+
+```text
+What is the minimum attendance percentage required to sit for the
+end-semester examination?
+```
+
+Expected state:
+
+```text
+ANSWERED
+```
+
+The system retrieves the relevant attendance regulation and returns the
+supported value with its citation.
+
+---
+
+### 2. NOT_FOUND
+
+**Question:**
+
+```text
+If I'm approved for the two-installment tuition payment plan and then
+miss the second installment, does the provisional cancellation process
+in Section 9.3 apply the same way as it would to a normal missed payment?
+```
+
+Expected state:
+
+```text
+NOT_FOUND
+```
+
+The corpus discusses the relevant mechanisms separately but does not explicitly
+establish that the provisional cancellation process applies to the
+two-installment scenario.
+
+RuleLens should not invent that connection.
+
+---
+
+### 3. CONTRADICTION
+
+**Question:**
+
+```text
+What time is the hostel curfew?
+```
+
+Expected state:
+
+```text
+CONTRADICTION
+```
+
+The corpus contains conflicting curfew values.
+
+RuleLens surfaces both passages rather than silently selecting one.
+
+The exact locations of the three planted contradictions are documented in:
+
+```text
+contradictions.md
+```
+
+That file is intentionally outside `corpus/`, so it is **not ingested into the
+vector store**.
+
+---
+
+## What Is Mocked / Simulated?
+
+### Nothing in the core pipeline is mocked.
+
+For every evaluation question, the system performs the actual pipeline:
+
+```text
+question
+   ↓
+MiniLM embedding
+   ↓
+Chroma retrieval
+   ↓
+retrieved corpus passages
+   ↓
+Qwen2.5 14B via Ollama
+   ↓
+state + answer + citations
+```
+
+There are:
+
+* no hardcoded answers
+* no fake retrieval results
+* no simulated LLM responses
+* no stubbed classification results
+
+The embeddings, retrieval, and LLM call are real and run against the actual
+corpus.
+
+### What was considered but not implemented?
+
+An earlier design considered a deterministic contradiction pre-check based on
+regex/value extraction. The idea was to detect conflicting numeric values
+before sending the question to the LLM.
+
+It was **not implemented** because prompt-based contradiction detection was
+sufficient to achieve:
+
+**3 / 3 contradiction questions correct.**
+
+A deterministic validation layer would be a natural future improvement if
+additional reliability were required.
+
+---
+
+## Contradiction Design
+
+The corpus contains three deliberately planted contradictions across the
+rulebook.
+
+The goal is to test whether the system:
+
+1. retrieves both conflicting passages,
+2. recognizes that they answer the same underlying question,
+3. avoids choosing a passage merely because it appears more authoritative,
+   specific, or operational,
+4. returns `CONTRADICTION`,
+5. cites the conflicting source passages.
+
+The system is explicitly instructed not to resolve direct conflicts by silently
+preferring one passage.
+
+The answer key is stored separately in:
+
+```text
+contradictions.md
+```
+
+---
+
+## Model Selection
+
+Three model configurations were evaluated during development.
+
+### 1. `llama-3.3-70b-versatile` via Groq
+
+This performed well but encountered rate limits during evaluation on the free
+tier. One evaluation also failed because of malformed JSON.
+
+### 2. `qwen3:4b` via Ollama
+
+This was fully local and free to run, but was not reliable enough for the
+nuance required by this task.
+
+It failed some easy answerable questions and also over-extended on unanswerable
+questions.
+
+### 3. `qwen2.5:14b-instruct` via Ollama
+
+This is the model used for the reported evaluation results.
+
+It provided:
+
+* reliable JSON output
+* stronger reasoning than the 4B local model
+* fully local execution
+* no API key
+* no per-token API cost
+* more stable behavior on the three-state classification task
+
+---
+
+## Design Decisions
+
+### Why Chroma?
+
+The project requires persistent local vector storage. Chroma provides a
+simple persistent vector database without requiring an external service.
+
+### Why MiniLM?
+
+`all-MiniLM-L6-v2` provides lightweight local embeddings with minimal setup and
+no API cost.
+
+### Why top-12 retrieval?
+
+The classifier needs enough surrounding context to detect cases where relevant
+rules appear in different parts of the corpus, particularly contradictions.
+
+### Why use an LLM for the three-state decision?
+
+The distinction between:
+
+```text
+"the corpus does not answer this"
+```
+
+and
+
+```text
+"the corpus contains enough information to answer this"
+```
+
+is not always reducible to a simple similarity threshold.
+
+Similarly, contradiction detection requires reasoning about whether two
+passages provide different answers to the same underlying quantity or rule.
+
+The retrieval distance threshold is therefore used only as an initial
+relevance sanity check. The more nuanced classification is handled by the
+local LLM.
+
+---
+
+## Known Limitations
+
+* Retrieval uses `all-MiniLM-L6-v2`, which is not fine-tuned specifically for
+  legal or regulatory text.
+
+* Three-state classification depends partly on the LLM distinguishing
+  **directly stated rules** from **reasonable inference**.
+
+* The system is single-turn. Each question is evaluated independently.
+
+* The Streamlit interface keeps visible question history, but each answer is
+  still generated from the current question rather than relying on previous
+  conversational context.
+
+* Local-model results can vary somewhat depending on the Ollama version and
+  model build, although `temperature=0` is used for more deterministic output.
+
+* The current evaluation score is not intended to represent general
+  benchmark performance. It measures performance on this project's specific
+  corpus and evaluation set.
+
+---
+
+## Future Improvements
+
+Potential extensions include:
+
+* stronger domain-specific embedding models
+* deterministic validation of extracted rule values
+* hybrid keyword + vector retrieval
+* better contradiction clustering
+* document version/date awareness
+* confidence calibration
+* automated regression testing on every code change
+* support for multi-turn rulebook conversations
+
+---
+
+## Project Goal
+
+RuleLens is intentionally not optimized for:
+
+> **"Answer every question."**
+
+It is optimized for:
+
+> **"Answer when the corpus supports the answer, refuse when it does not,
+> and surface conflicts instead of hiding them."**
+
+That distinction is the core of the project.
+
+---
+
+## License
+
+This project is created as part of an academic/project evaluation submission.
+
+```
+
+**One final check before you commit:** your actual `app.py` is at the repository root, so this version now consistently uses `app.py` everywhere. The README also accurately documents the current **35/41** evaluation rather than hiding the failures.
+```
